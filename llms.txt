@@ -23,5 +23,3 @@
 - [MODX](https://siterescue24.ru/modx.html): лечение и восстановление, от 9 900 ₽.
 - [Joomla](https://siterescue24.ru/joomla.html): лечение и восстановление, от 7 900 ₽.
 - [Самописные PHP-проекты](https://siterescue24.ru/php.html): лечение и восстановление, от 12 900 ₽.
-
-Обновлено: 2026-08-24

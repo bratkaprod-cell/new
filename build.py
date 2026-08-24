@@ -394,9 +394,10 @@ def facts_section(price_from, scope):
         <div class="facts-contacts">
           <a href="{PHONE_HREF}">{icon('phone')}{PHONE}</a>
           <a href="{TG}">{icon('telegram')}Telegram</a>
-          <a href="mailto:{EMAIL}">{EMAIL}</a>
+          <a href="mailto:{EMAIL}">{icon('mail')}{EMAIL}</a>
         </div>
-        <p class="fine">Ответим за 10 минут · Обновлено: <time datetime="{BUILD_DATE}">{BUILD_DATE_RU}</time></p>
+        {socials('socials facts-socials')}
+        <p class="fine">Ответим за 10 минут</p>
       </aside>
     </div>
   </div>
@@ -471,12 +472,12 @@ def process_section():
       <div class="proc-cta-txt">
         <b>Сайт лежит прямо сейчас?</b>
         <span>Опишите проблему — через 30 минут вы будете знать диагноз и точную цену. Это бесплатно и ни к чему не обязывает.</span>
+        {socials('socials proc-socials')}
       </div>
       <div class="proc-cta-btns">
         <a class="btn btn-cta" href="#contact">Спасти сайт — 0 ₽</a>
         <a class="btn btn-outline proc-btn-tg" href="{TG}">{icon('telegram')}Написать в Telegram</a>
       </div>
-      {socials('socials proc-socials')}
     </div>
   </div>
 </section>
@@ -607,7 +608,7 @@ FOOTER = """
       <div class="footer-col">
         <b>Контакты</b>
         <a href="%PHONE_HREF%" class="footer-phone">%PHONE%</a>
-        <a href="mailto:help@siterescue24.ru">help@siterescue24.ru</a>
+        <a href="mailto:help@siterescue24.ru">%MAILICON%help@siterescue24.ru</a>
         %SOCIALS%
         <div class="footer-badges"><span>Договор</span><span>Конфиденциально</span><span>Гарантия 1 год</span></div>
       </div>
@@ -618,7 +619,7 @@ FOOTER = """
     </div>
   </div>
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
-</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")) + """
+</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")).replace("%MAILICON%", icon("mail")) + """
 <div class="sticky-cta"><a class="btn btn-cta btn-lg" href="#contact">Спасти сайт — диагностика 0 ₽</a></div>
 <div class="modal-overlay" id="lead-modal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -870,7 +871,7 @@ llms = f"""# SiteRescue24
 """
 for slug, d in CMS.items():
     llms += f"- [{d['name']}]({DOMAIN}/{slug}.html): лечение и восстановление, от {d['price_from']} ₽.\n"
-llms += f"\nОбновлено: {BUILD_DATE}\n"
+
 with open(os.path.join(OUT, "llms.txt"), "w", encoding="utf-8") as f:
     f.write(llms)
 print("written llms.txt")
