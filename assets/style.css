@@ -276,6 +276,26 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .form-socials{justify-content:center;margin-top:20px}
 .form-socials a{width:42px;height:42px}
 
+/* legal page */
+.legal{padding:120px 0 80px;background:var(--black)}
+.legal h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:18px 0 10px;line-height:1.2}
+.legal h2{font-size:1.15rem;margin:34px 0 12px;color:var(--yellow)}
+.legal p{color:var(--muted-d);font-size:.95rem;line-height:1.65;margin-bottom:10px;max-width:860px}
+.legal a{color:var(--yellow);text-decoration:underline}
+.legal .crumbs a{color:var(--muted-d);text-decoration:none}
+
+/* cookie bar */
+.cookie-bar{position:fixed;right:20px;bottom:20px;z-index:1200;display:flex;align-items:center;gap:14px;max-width:420px;background:linear-gradient(180deg,#1b1b1b 0%,#131313 100%);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px 18px;box-shadow:0 24px 60px rgba(0,0,0,.55);opacity:0;transform:translateY(16px);pointer-events:none;transition:.35s ease}
+.cookie-bar.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.cookie-ic{font-size:1.5rem;line-height:1}
+.cookie-txt{font-size:.83rem;color:var(--muted-d);line-height:1.5}
+.cookie-txt a{color:var(--yellow);text-decoration:underline}
+.cookie-btn{padding:10px 18px;font-size:.82rem;white-space:nowrap;flex-shrink:0}
+@media(max-width:620px){
+  .cookie-bar{left:12px;right:12px;bottom:76px;max-width:none;flex-wrap:wrap}
+  .cookie-btn{flex:1 1 100%}
+}
+
 /* footer */
 footer{background:#070707;border-top:1px solid rgba(255,255,255,.08);padding:0 0 30px;color:var(--muted-d);font-size:.9rem;position:relative}
 .footer-cta{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:var(--red);color:#fff;border-radius:var(--radius);padding:28px 32px;transform:translateY(-40px);box-shadow:0 20px 50px rgba(229,9,20,.3)}

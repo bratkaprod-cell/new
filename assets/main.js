@@ -250,3 +250,23 @@ if (form) {
     btn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
   });
 }
+
+// cookie consent
+const cookieBar = document.getElementById('cookie-bar');
+if (cookieBar) {
+  const COOKIE_KEY = 'ip_cookie_ok';
+  let accepted = false;
+  try { accepted = localStorage.getItem(COOKIE_KEY) === '1'; } catch (e) { accepted = false; }
+  if (!accepted) {
+    setTimeout(() => {
+      cookieBar.classList.add('show');
+      cookieBar.setAttribute('aria-hidden', 'false');
+    }, 1500);
+    const btn = document.getElementById('cookie-accept');
+    if (btn) btn.addEventListener('click', () => {
+      try { localStorage.setItem(COOKIE_KEY, '1'); } catch (e) {}
+      cookieBar.classList.remove('show');
+      cookieBar.setAttribute('aria-hidden', 'true');
+    });
+  }
+}
