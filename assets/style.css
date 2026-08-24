@@ -193,6 +193,45 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .step .num{width:46px;height:46px;border-radius:10px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;margin-bottom:15px}
 .step small{color:var(--red);font-weight:800;display:block;margin-top:10px;text-transform:uppercase;font-size:.78rem;letter-spacing:.04em}
 
+/* process v2 */
+.sec-tag{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;border:1px solid rgba(229,9,20,.45);color:var(--red);font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;margin-bottom:18px}
+.sec-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red)}
+#process{background:radial-gradient(900px 420px at 15% 0%,rgba(229,9,20,.12),transparent 60%),var(--black)}
+.proc{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
+.proc-track{position:absolute;top:51px;left:calc(12.5% - 9px);right:calc(12.5% - 9px);height:2px;background:linear-gradient(90deg,var(--red) 0%,rgba(229,9,20,.55) 60%,rgba(255,212,0,.9) 100%);pointer-events:none;z-index:0}
+.proc-step{position:relative;z-index:1;display:flex;flex-direction:column;background:linear-gradient(180deg,#161616 0%,#101010 100%);border:1px solid rgba(255,255,255,.09);border-radius:var(--radius);padding:26px 24px 24px;transition:.22s}
+.proc-step:hover{border-color:rgba(229,9,20,.65);box-shadow:0 22px 48px rgba(0,0,0,.5),0 0 0 1px rgba(229,9,20,.25);transform:translateY(-4px)}
+.proc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.proc-num{width:50px;height:50px;border-radius:14px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.35rem;box-shadow:0 10px 24px rgba(229,9,20,.35)}
+.proc-step:last-child .proc-num{background:var(--yellow);color:var(--black);box-shadow:0 10px 24px rgba(255,212,0,.28)}
+.proc-ic-wrap{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:var(--muted-d);transition:.22s}
+.proc-step:hover .proc-ic-wrap{color:var(--yellow);border-color:rgba(255,212,0,.4)}
+.proc-ic{width:22px;height:22px}
+.proc-time{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);margin-bottom:8px}
+.proc-step h3{font-size:1.08rem;line-height:1.25;margin-bottom:8px}
+.proc-step p{color:var(--muted-d);font-size:.92rem;flex:1}
+.proc-badge{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:8px 12px;border-radius:9px;background:rgba(229,9,20,.12);border:1px solid rgba(229,9,20,.3);color:#ff6b72;font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;align-self:flex-start}
+.proc-badge::before{content:"✓";font-weight:900}
+.proc-cta{display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-top:34px;background:linear-gradient(120deg,#1a1a1a 0%,#111 100%);border:1px solid rgba(255,255,255,.1);border-left:4px solid var(--yellow);border-radius:var(--radius);padding:28px 32px}
+.proc-cta-txt b{display:block;font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+.proc-cta-txt span{display:block;color:var(--muted-d);font-size:.95rem;margin-top:5px;max-width:520px}
+.proc-cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.proc-btn-tg .icn{width:18px;height:18px}
+@media(max-width:960px){
+  .proc{grid-template-columns:1fr 1fr}
+  .proc-track{display:none}
+}
+@media(max-width:620px){
+  .proc{grid-template-columns:1fr;gap:0;padding-left:24px}
+  .proc::before{content:"";position:absolute;top:10px;bottom:10px;left:1px;width:2px;background:linear-gradient(180deg,var(--red),rgba(255,212,0,.9))}
+  .proc-step{margin-bottom:16px}
+  .proc-step::before{content:"";position:absolute;top:38px;left:-24px;width:24px;height:2px;background:rgba(229,9,20,.55)}
+  .proc-step:hover{transform:none}
+  .proc-cta{padding:24px 20px;border-left-width:3px}
+  .proc-cta-btns{width:100%}
+  .proc-cta-btns .btn{flex:1 1 100%;width:100%}
+}
+
 /* strip */
 .strip{background:var(--yellow);color:var(--black);border-radius:var(--radius);padding:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 @media(max-width:900px){.strip{grid-template-columns:1fr 1fr}}

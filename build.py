@@ -432,17 +432,50 @@ def pain_section(pains, money_line):
 </section>
 """
 
+PROC_ICONS = {
+    "chat": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+    "lock": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    "tool": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    "check": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+}
+
+
 def process_section():
-    return """
+    steps = [
+        ("chat", "10 минут", "Ответим за 10 минут", "Возьмём сайт в работу и за 30 минут скажем: что случилось, сколько стоит и когда заработает.", "Бесплатно"),
+        ("lock", "До старта работ", "Фиксируем цену", "Называем точную сумму до начала работ. Никаких «в процессе выяснилось, доплатите».", "Цена не меняется"),
+        ("tool", "4–12 часов", "Чиним и чистим", "Убираем заражение из файлов и базы, находим и закрываем причину взлома.", "Работаем на копии"),
+        ("check", "Финал", "Проверяете — потом платите", "Сдаём работающий сайт, возвращаем его в поиск, ставим защиту. Оплата — после проверки.", "Гарантия 1 год письменно"),
+    ]
+    cards = "".join(
+        f"""
+      <article class="proc-step reveal">
+        <div class="proc-head"><span class="proc-num">{i}</span><span class="proc-ic-wrap">{PROC_ICONS[ic]}</span></div>
+        <span class="proc-time">{time}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+        <span class="proc-badge">{badge}</span>
+      </article>"""
+        for i, (ic, time, title, text, badge) in enumerate(steps, 1)
+    )
+    return f"""
 <section id="process">
   <div class="container">
-    <div class="center reveal"><h2>Что будет после вашей заявки</h2>
-    <p class="lead">Никакой магии и туманных обещаний — четыре понятных шага:</p></div>
-    <div class="grid grid-4" style="margin-top:44px">
-      <div class="card step reveal"><div class="num">1</div><h3>Ответим за 10 минут</h3><p>Возьмём сайт в работу и за 30 минут скажем: что случилось, сколько стоит и когда заработает.</p><small>Бесплатно</small></div>
-      <div class="card step reveal"><div class="num">2</div><h3>Фиксируем цену</h3><p>Называем точную сумму до начала работ. Никаких «в процессе выяснилось, доплатите».</p><small>Цена не меняется</small></div>
-      <div class="card step reveal"><div class="num">3</div><h3>Чиним и чистим</h3><p>Убираем заражение из файлов и базы, находим и закрываем причину взлома.</p><small>Сайт не трогаем — работаем на копии</small></div>
-      <div class="card step reveal"><div class="num">4</div><h3>Вы проверяете — потом платите</h3><p>Сдаём работающий сайт, возвращаем его в поиск, ставим защиту. Оплата — после проверки.</p><small>Гарантия 1 год письменно</small></div>
+    <div class="center reveal"><span class="sec-tag">Как мы работаем</span>
+    <h2>Что будет после <span class="red">вашей заявки</span></h2>
+    <p class="lead">Никакой магии и туманных обещаний — четыре понятных шага от заявки до работающего сайта:</p></div>
+    <div class="proc">
+      <div class="proc-track" aria-hidden="true"></div>{cards}
+    </div>
+    <div class="proc-cta reveal">
+      <div class="proc-cta-txt">
+        <b>Сайт лежит прямо сейчас?</b>
+        <span>Опишите проблему — через 30 минут вы будете знать диагноз и точную цену. Это бесплатно и ни к чему не обязывает.</span>
+      </div>
+      <div class="proc-cta-btns">
+        <a class="btn btn-cta" href="#contact">Спасти сайт — 0 ₽</a>
+        <a class="btn btn-outline proc-btn-tg" href="{TG}">{icon('telegram')}Написать в Telegram</a>
+      </div>
     </div>
   </div>
 </section>
