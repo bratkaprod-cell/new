@@ -25,8 +25,11 @@ $phone = trim(mb_substr((string)($_POST['phone'] ?? ''), 0, 30));
 $cms   = trim(mb_substr((string)($_POST['cms'] ?? ''), 0, 40));
 $page  = trim(mb_substr((string)($_POST['page'] ?? ''), 0, 200));
 
-if (mb_strlen($name) < 2 || $site === '' || $phone === '') {
+if ($site === '' || $phone === '') {
     respond(false, 'fields');
+}
+if ($name === '') {
+    $name = 'Не указано';
 }
 $digits = preg_replace('/\D/', '', $phone);
 if (strlen($digits) < 10) {

@@ -93,31 +93,38 @@ if (modal) {
     });
   }
 
-  // quick "your site" forms: validate URL, then open the modal pre-filled
-  document.querySelectorAll('.js-quick-form').forEach((qf) => {
-    qf.addEventListener('submit', (ev) => {
-      ev.preventDefault();
-      showError(qf, '');
-      const hp = qf.querySelector('.hp-field');
-      if (hp && hp.value) return; // honeypot: silently drop bots
-      if (Date.now() - PAGE_LOADED_AT < 3000) {
-        showError(qf, 'Подождите пару секунд и попробуйте ещё раз.');
-        return;
-      }
-      const site = qf.querySelector('input[name="site"]');
-      if (!validSite(site.value)) {
-        showError(qf, 'Введите корректный адрес сайта, например site.ru');
-        site.focus();
-        return;
-      }
-      openModal('');
-      const msite = modalForm ? modalForm.querySelector('input[name="site"]') : null;
-      if (msite) msite.value = site.value.trim();
-      const mname = modalForm ? modalForm.querySelector('input[name="name"]') : null;
-      if (mname) setTimeout(() => mname.focus(), 260);
-    });
-  });
 }
+
+// quick "site + phone" forms: send the lead right away, no popup
+document.querySelectorAll('.js-quick-form').forEach((qf) => {
+  qf.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    showError(qf, '');
+    const hp = qf.querySelector('.hp-field');
+    if (hp && hp.value) return; // honeypot: silently drop bots
+    if (Date.now() - PAGE_LOADED_AT < 3000) {
+      showError(qf, 'Подождите пару секунд и попробуйте ещё раз.');
+      return;
+    }
+    const site = qf.querySelector('input[name="site"]');
+    if (!validSite(site.value)) {
+      showError(qf, 'Введите корректный адрес сайта, например site.ru');
+      site.focus();
+      return;
+    }
+    const phone = qf.querySelector('input.js-phone');
+    if (phone && !validPhone(phone.value)) {
+      showError(qf, 'Введите корректный номер: +7 (XXX) XXX-XX-XX');
+      phone.focus();
+      return;
+    }
+    if (!submitsAllowed()) {
+      showError(qf, 'Слишком много заявок. Позвоните нам или напишите в мессенджер.');
+      return;
+    }
+    sendLead(qf, '');
+  });
+});
 
 // --- phone mask: +7 (XXX) XXX-XX-XX ---
 const formatPhone = (digits) => {

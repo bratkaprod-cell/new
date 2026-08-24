@@ -438,17 +438,21 @@ STRIP = f"""
 """
 
 def quick_form(dark=False):
-    """Мини-форма «Ваш сайт → Отправить»: после проверки URL открывает модалку с предзаполненным сайтом."""
+    """Мини-форма «сайт + телефон»: заявка уходит сразу (send-lead.php), без popup."""
     cls = "quick-form js-quick-form reveal" + (" qf-dark" if dark else "")
     return f"""<form class="{cls}" novalidate>
-      <b class="qf-title">Узнайте бесплатно, что с вашим сайтом</b>
+      <div class="qf-head">
+        <b class="qf-title">Узнайте бесплатно, что с вашим сайтом</b>
+        <p class="qf-sub">Оставьте сайт и телефон — через 30 минут вы будете знать диагноз и точную цену ремонта</p>
+      </div>
       <div class="qf-row">
         <input type="url" name="site" placeholder="Ваш сайт, например site.ru" maxlength="200" autocomplete="url" required>
-        <button class="btn btn-cta" type="submit">Отправить</button>
+        <input type="tel" name="phone" class="js-phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
+        <button class="btn btn-cta qf-btn" type="submit">Получить диагноз — 0 ₽</button>
       </div>
       <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="form-error" aria-live="polite"></p>
-      <p class="fine">Диагноз и точная цена через 30 минут · 0 ₽ · ни к чему не обязывает</p>
+      <div class="qf-points"><span>Ответ за 30 минут</span><span>Без предоплаты</span><span>Ни к чему не обязывает</span></div>
     </form>"""
 
 
