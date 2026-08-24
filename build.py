@@ -449,7 +449,7 @@ def process_section():
     ]
     cards = "".join(
         f"""
-      <article class="proc-step reveal">
+      <article class="proc-step reveal js-open-modal" role="button" tabindex="0" aria-label="{title} — оставить заявку">
         <div class="proc-head"><span class="proc-num">{i}</span><span class="proc-ic-wrap">{PROC_ICONS[ic]}</span></div>
         <span class="proc-time">{time}</span>
         <h3>{title}</h3>
@@ -476,6 +476,7 @@ def process_section():
         <a class="btn btn-cta" href="#contact">Спасти сайт — 0 ₽</a>
         <a class="btn btn-outline proc-btn-tg" href="{TG}">{icon('telegram')}Написать в Telegram</a>
       </div>
+      {socials('socials proc-socials')}
     </div>
   </div>
 </section>

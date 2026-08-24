@@ -199,7 +199,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 #process{background:radial-gradient(900px 420px at 15% 0%,rgba(229,9,20,.12),transparent 60%),var(--black)}
 .proc{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px}
 .proc-track{position:absolute;top:51px;left:calc(12.5% - 9px);right:calc(12.5% - 9px);height:2px;background:linear-gradient(90deg,var(--red) 0%,rgba(229,9,20,.55) 60%,rgba(255,212,0,.9) 100%);pointer-events:none;z-index:0}
-.proc-step{position:relative;z-index:1;display:flex;flex-direction:column;background:linear-gradient(180deg,#161616 0%,#101010 100%);border:1px solid rgba(255,255,255,.09);border-radius:var(--radius);padding:26px 24px 24px;transition:.22s}
+.proc-step{cursor:pointer;position:relative;z-index:1;display:flex;flex-direction:column;background:linear-gradient(180deg,#161616 0%,#101010 100%);border:1px solid rgba(255,255,255,.09);border-radius:var(--radius);padding:26px 24px 24px;transition:.22s}
 .proc-step:hover{border-color:rgba(229,9,20,.65);box-shadow:0 22px 48px rgba(0,0,0,.5),0 0 0 1px rgba(229,9,20,.25);transform:translateY(-4px)}
 .proc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .proc-num{width:50px;height:50px;border-radius:14px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.35rem;box-shadow:0 10px 24px rgba(229,9,20,.35)}
@@ -216,6 +216,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .proc-cta-txt b{display:block;font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
 .proc-cta-txt span{display:block;color:var(--muted-d);font-size:.95rem;margin-top:5px;max-width:520px}
 .proc-cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.proc-socials{flex-basis:100%;justify-content:center;margin-top:4px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.proc-socials a{width:42px;height:42px}
 .proc-btn-tg .icn{width:18px;height:18px}
 @media(max-width:960px){
   .proc{grid-template-columns:1fr 1fr}
@@ -230,6 +232,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
   .proc-cta{padding:24px 20px;border-left-width:3px}
   .proc-cta-btns{width:100%}
   .proc-cta-btns .btn{flex:1 1 100%;width:100%}
+  .proc-socials{padding-top:16px}
 }
 
 /* strip */

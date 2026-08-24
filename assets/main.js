@@ -62,13 +62,19 @@ if (modal) {
     modal.classList.remove('open');
     lockScroll(false);
   };
-  document.querySelectorAll('.js-open-modal').forEach((btn) =>
+  document.querySelectorAll('.js-open-modal').forEach((btn) => {
     btn.addEventListener('click', (ev) => {
       ev.preventDefault();
       ev.stopPropagation();
       openModal(btn.dataset.cms || '');
-    })
-  );
+    });
+    btn.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        openModal(btn.dataset.cms || '');
+      }
+    });
+  });
   modal.addEventListener('click', (ev) => {
     if (ev.target === modal) closeModal();
   });
