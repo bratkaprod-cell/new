@@ -148,16 +148,49 @@ const phoneDigits = (value) => {
   return d;
 };
 document.querySelectorAll('input.js-phone').forEach((inp) => {
-  const nationalDigits = () => {
-    let d = inp.value.replace(/\D/g, '');
+  const nationalDigits = (value) => {
+    let d = value.replace(/\D/g, '');
     if (d.startsWith('8')) d = '7' + d.slice(1);
     if (d.startsWith('7')) d = d.slice(1);
     return d.slice(0, 10);
   };
-  const setValue = (d) => {
+  // how many national digits are before a caret position in the formatted value
+  const digitIndexAt = (pos) => {
+    const total = nationalDigits(inp.value).length;
+    let count = 0;
+    let skippedPrefix = false;
+    for (let i = 0; i < Math.min(pos, inp.value.length); i++) {
+      if (/\d/.test(inp.value[i])) {
+        if (!skippedPrefix && inp.value[i] === '7' && inp.value.slice(0, i + 1).replace(/\D/g, '') === '7') {
+          skippedPrefix = true;
+          continue;
+        }
+        count++;
+      }
+    }
+    return Math.min(count, total);
+  };
+  // caret position in the formatted value right after the n-th national digit
+  const caretForDigit = (n) => {
+    if (n <= 0) return Math.min(4, inp.value.length);
+    let count = 0;
+    let skippedPrefix = false;
+    for (let i = 0; i < inp.value.length; i++) {
+      if (/\d/.test(inp.value[i])) {
+        if (!skippedPrefix && inp.value[i] === '7' && inp.value.slice(0, i + 1).replace(/\D/g, '') === '7') {
+          skippedPrefix = true;
+          continue;
+        }
+        count++;
+        if (count === n) return i + 1;
+      }
+    }
+    return inp.value.length;
+  };
+  const setValue = (d, caretDigit) => {
     inp.value = formatPhone('7' + d);
-    const end = inp.value.length;
-    inp.setSelectionRange(end, end);
+    const pos = caretDigit === undefined ? inp.value.length : caretForDigit(caretDigit);
+    inp.setSelectionRange(pos, pos);
   };
   inp.addEventListener('focus', () => {
     if (!inp.value) inp.value = '+7 (';
@@ -165,20 +198,26 @@ document.querySelectorAll('input.js-phone').forEach((inp) => {
   inp.addEventListener('blur', () => {
     if (inp.value === '+7 (' || inp.value === '+7') inp.value = '';
   });
-  // digits are always appended in order, regardless of caret position
   inp.addEventListener('keydown', (ev) => {
     if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    if (ev.key.length !== 1 && ev.key !== 'Backspace' && ev.key !== 'Delete') return;
+    ev.preventDefault();
+    const d = nationalDigits(inp.value);
+    const selStart = digitIndexAt(inp.selectionStart);
+    const selEnd = digitIndexAt(inp.selectionEnd);
+    const hasSelection = inp.selectionEnd > inp.selectionStart;
     if (ev.key.length === 1) {
-      ev.preventDefault();
-      if (/\d/.test(ev.key)) {
-        const d = nationalDigits();
-        if (d.length < 10) setValue(d + ev.key);
-      }
-    } else if (ev.key === 'Backspace' || ev.key === 'Delete') {
-      ev.preventDefault();
-      const d = nationalDigits();
-      if (d.length > 0) setValue(d.slice(0, -1));
-      else inp.value = '+7 (';
+      if (!/\d/.test(ev.key)) return;
+      const next = d.slice(0, selStart) + ev.key + d.slice(hasSelection ? selEnd : selStart);
+      if (next.length <= 10) setValue(next, selStart + 1);
+      else if (!hasSelection && selStart < d.length) setValue(d.slice(0, selStart) + ev.key + d.slice(selStart + 1), selStart + 1);
+    } else if (ev.key === 'Backspace') {
+      if (hasSelection) setValue(d.slice(0, selStart) + d.slice(selEnd), selStart);
+      else if (selStart > 0) setValue(d.slice(0, selStart - 1) + d.slice(selStart), selStart - 1);
+      else if (!d.length) inp.value = '+7 (';
+    } else {
+      if (hasSelection) setValue(d.slice(0, selStart) + d.slice(selEnd), selStart);
+      else if (selStart < d.length) setValue(d.slice(0, selStart) + d.slice(selStart + 1), selStart);
     }
   });
   // paste / autofill / mobile keyboards
