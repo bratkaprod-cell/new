@@ -24,13 +24,13 @@ def icon(name, cls="icn"):
     return svg.replace("<svg ", f'<svg class="{cls}" aria-hidden="true" ', 1)
 
 
-def socials(cls="socials"):
+def socials(cls="socials", phone=True):
+    phone_link = f'\n      <a class="soc-ph" href="{PHONE_HREF}" aria-label="Позвонить" title="Позвонить">{icon("phone")}</a>' if phone else ""
     return f"""<div class="{cls}">
       <a class="soc-tg" href="{TG}" aria-label="Telegram" title="Telegram">{icon('telegram')}</a>
       <a class="soc-wa" href="{WA}" aria-label="WhatsApp" title="WhatsApp">{icon('whatsapp')}</a>
       <a class="soc-max" href="{MAX}" aria-label="MAX" title="MAX">{icon('max')}</a>
-      <a class="soc-vk" href="{VK}" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>
-      <a class="soc-ph" href="{PHONE_HREF}" aria-label="Позвонить" title="Позвонить">{icon('phone')}</a>
+      <a class="soc-vk" href="{VK}" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>{phone_link}
     </div>"""
 
 def org_schema():
@@ -491,11 +491,11 @@ def process_section():
       <div class="proc-cta-txt">
         <b>Сайт лежит прямо сейчас?</b>
         <span>Опишите проблему — через 30 минут вы будете знать диагноз и точную цену. Это бесплатно и ни к чему не обязывает.</span>
-        {socials('socials proc-socials')}
+        {socials('socials proc-socials', phone=False)}
       </div>
       <div class="proc-cta-btns">
         <a class="btn btn-cta" href="#contact">Спасти сайт — 0 ₽</a>
-        <a class="btn btn-outline proc-btn-tg" href="{TG}">{icon('telegram')}Написать в Telegram</a>
+        <a class="proc-cta-phone" href="{PHONE_HREF}">{PHONE}</a>
       </div>
     </div>
   </div>
