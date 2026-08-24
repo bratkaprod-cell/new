@@ -88,7 +88,8 @@ if (modal) {
     modalForm.addEventListener('submit', (ev) => {
       ev.preventDefault();
       if (!validateLeadForm(modalForm)) return;
-      box.classList.add('sent');
+      const cms = cmsEl ? cmsEl.textContent.replace(/^на\s+/, '') : '';
+      sendLead(modalForm, cms, () => box.classList.add('sent'));
     });
   }
 
@@ -263,16 +264,37 @@ const validateLeadForm = (form) => {
   return true;
 };
 
+// --- real lead delivery: POST to send-lead.php (email + Telegram + VK) ---
+const sendLead = (form, cms, onSuccess) => {
+  const btn = form.querySelector('button[type="submit"]');
+  const prevText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
+  const data = new FormData(form);
+  if (cms) data.append('cms', cms);
+  data.append('page', location.pathname + location.hash);
+  fetch('send-lead.php', { method: 'POST', body: data })
+    .then((r) => r.json())
+    .then((res) => {
+      if (!res.ok) throw new Error(res.error || 'delivery');
+      if (onSuccess) onSuccess();
+      if (btn) {
+        btn.textContent = 'Заявка отправлена ✓';
+        btn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
+      }
+    })
+    .catch(() => {
+      if (btn) { btn.disabled = false; btn.textContent = prevText; }
+      showError(form, 'Не удалось отправить. Позвоните нам или напишите в мессенджер.');
+    });
+};
+
 // form
 const form = document.getElementById('lead-form');
 if (form) {
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
     if (!validateLeadForm(form)) return;
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Заявка отправлена ✓';
-    btn.disabled = true;
-    btn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
+    sendLead(form, '');
   });
 }
 

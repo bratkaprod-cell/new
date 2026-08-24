@@ -340,7 +340,7 @@ def base_head(title, desc, page, kw="", schema=""):
       <a href="{page}#pricing">Цены</a>
       <a href="{page}#faq">Вопросы</a>
     </nav>
-    {socials('socials nav-socials')}
+    {socials('socials nav-socials', phone=False)}
     <a class="nav-phone" href="{PHONE_HREF}">{PHONE}</a>
     <a class="nav-phone-icon soc-ph" href="{PHONE_HREF}" aria-label="Позвонить">{icon('phone')}</a>
     <a class="btn btn-cta nav-cta" href="{page}#contact">Спасти сайт</a>
@@ -510,7 +510,7 @@ def process_section():
         {socials('socials proc-socials', phone=False)}
       </div>
       <div class="proc-cta-btns">
-        <a class="btn btn-cta" href="#contact">Спасти сайт — 0 ₽</a>
+        <a class="btn btn-cta" href="#contact">Узнать диагноз за 30 минут — 0 ₽</a>
         <a class="proc-cta-phone" href="{PHONE_HREF}">{PHONE}</a>
       </div>
     </div>
@@ -603,9 +603,8 @@ def contact_section():
       <button class="btn btn-cta btn-lg" type="submit">Узнать, что с сайтом — бесплатно</button>
       <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой обработки персональных данных</a>.</p>
     </form>
-    {socials('socials form-socials')}
+    {socials('socials form-socials', phone=False)}
     <div class="messengers">
-      <a class="btn btn-outline" href="{TG}">Написать в Telegram</a>
       <a class="btn btn-outline" href="{PHONE_HREF}">{PHONE}</a>
     </div>
     <p style="margin-top:18px;color:#8a8a8a;font-size:.9rem">Работаем 24/7 · Отвечаем за 10 минут</p>
