@@ -299,7 +299,7 @@ def base_head(title, desc, page, kw="", schema=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -393,7 +393,6 @@ def facts_section(price_from, scope):
         <a class="btn btn-cta facts-btn" href="#contact">Узнать точную цену — 0 ₽</a>
         <div class="facts-contacts">
           <a href="{PHONE_HREF}">{icon('phone')}{PHONE}</a>
-          <a href="{TG}">{icon('telegram')}Telegram</a>
           <a href="mailto:{EMAIL}">{icon('mail')}{EMAIL}</a>
         </div>
         {socials('socials facts-socials')}
@@ -405,14 +404,24 @@ def facts_section(price_from, scope):
 """
 
 
-STRIP = """
-<section style="padding:44px 0" class="light">
+STRIP = f"""
+<section class="light strip-sec">
   <div class="container">
     <div class="strip reveal">
-      <div><b>30 мин</b><span>и вы знаете, что случилось и сколько стоит ремонт</span></div>
-      <div><b>24 часа</b><span>максимум — и сайт снова приносит деньги</span></div>
-      <div><b>0 ₽</b><span>предоплаты: платите, когда сайт уже работает</span></div>
-      <div><b>1 год</b><span>гарантии: повторный взлом чиним бесплатно</span></div>
+      <div class="strip-head">
+        <span class="strip-tag">Наши обязательства — в договоре</span>
+        <h2>Цифры, за которые мы <span class="strip-accent">отвечаем</span></h2>
+      </div>
+      <div class="strip-grid">
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['search']}</span><b>30 мин</b><span>и вы знаете, что случилось и сколько стоит ремонт</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['clock']}</span><b>24 часа</b><span>максимум — и сайт снова приносит деньги</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['wallet']}</span><b>0 ₽</b><span>предоплаты: платите, когда сайт уже работает</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['shield']}</span><b>1 год</b><span>гарантии: повторный взлом чиним бесплатно</span></div>
+      </div>
+      <div class="strip-foot">
+        <a class="btn btn-cta strip-btn js-open-modal" href="#contact">Получить бесплатную диагностику</a>
+        <p>Без предоплаты · Ответим за 10 минут · Заявки 24/7</p>
+      </div>
     </div>
   </div>
 </section>
