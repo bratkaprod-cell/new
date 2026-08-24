@@ -219,8 +219,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .proc-cta-btns{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .proc-socials{margin-top:16px}
 .proc-socials a{width:42px;height:42px}
-.proc-cta-phone{display:block;text-align:center;font-weight:900;font-size:1.15rem;color:var(--white);white-space:nowrap;transition:color .15s}
-.proc-cta-phone:hover{color:var(--yellow)}
+.proc-cta-phone{font-weight:900;font-size:1.05rem;white-space:nowrap}
+.proc-cta-phone:hover{color:var(--yellow);border-color:var(--yellow)}
 @media(max-width:960px){
   .proc{grid-template-columns:1fr 1fr}
   .proc-track{display:none}

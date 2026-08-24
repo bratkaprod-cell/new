@@ -515,7 +515,7 @@ def process_section():
       </div>
       <div class="proc-cta-btns">
         <a class="btn btn-cta" href="#contact">Узнать диагноз за 30 минут — 0 ₽</a>
-        <a class="proc-cta-phone" href="{PHONE_HREF}">{PHONE}</a>
+        <a class="btn btn-outline proc-cta-phone" href="{PHONE_HREF}">{PHONE}</a>
       </div>
     </div>
   </div>
@@ -605,7 +605,7 @@ def contact_section():
       <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="form-error" aria-live="polite"></p>
       <button class="btn btn-cta btn-lg" type="submit">Узнать, что с сайтом — бесплатно</button>
-      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой обработки персональных данных</a>.</p>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
     </form>
     {socials('socials form-socials', phone=False)}
     <div class="messengers">
@@ -654,7 +654,7 @@ FOOTER = """
     </div>
     <div class="footer-bottom">
       <div>© 2026 intelprime.ru. Все права защищены.</div>
-      <div><a href="privacy.html">Политика конфиденциальности</a></div>
+      <div><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></div>
     </div>
   </div>
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
@@ -673,7 +673,7 @@ FOOTER = """
       <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="form-error" aria-live="polite"></p>
       <button class="btn btn-cta btn-lg" type="submit">Получить бесплатную диагностику</button>
-      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html">политикой обработки персональных данных</a>.</p>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
     </form>
     <div class="modal-ok" id="modal-ok">
       <div class="ok-ic">✓</div>
@@ -684,7 +684,7 @@ FOOTER = """
 </div>
 <div class="cookie-bar" id="cookie-bar" role="dialog" aria-label="Сообщение об использовании cookie" aria-hidden="true">
   <div class="cookie-ic">🍪</div>
-  <div class="cookie-txt">Мы используем файлы cookie для корректной работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="privacy.html">политикой конфиденциальности</a>.</div>
+  <div class="cookie-txt">Мы используем файлы cookie для корректной работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</div>
   <button class="btn btn-cta cookie-btn" id="cookie-accept" type="button">Принять</button>
 </div>
 <script src="assets/main.js"></script>
