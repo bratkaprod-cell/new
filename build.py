@@ -353,26 +353,50 @@ def base_head(title, desc, page, kw="", schema=""):
 </div>
 """
 
+FACT_ICONS = {
+    "bolt": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    "clock": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    "search": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    "wallet": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+    "shield": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>',
+    "globe": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+}
+
+
 def facts_section(price_from, scope):
     """Короткий блок фактов: его цитируют ИИ-ответы Яндекса, Google и чат-боты."""
-    rows = [
-        ("Услуга", f"Срочное лечение от вирусов и восстановление после взлома для {scope}"),
-        ("Срок", "4–12 часов в большинстве случаев, максимум 24 часа"),
-        ("Диагностика", "Бесплатно, результат и точная цена — за 30 минут"),
-        ("Цена", f"от {price_from} ₽ разово; подписка «Охрана» — 1 990 ₽/мес"),
-        ("Предоплата", "Нет: оплата после проверки работающего сайта"),
-        ("Гарантия", "1 год письменно в договоре: повторный взлом того же типа чиним бесплатно"),
-        ("Режим работы", "Заявки круглосуточно, 7 дней в неделю"),
-        ("География", "Вся Россия и СНГ, работаем удалённо"),
-        ("Контакты", f'<a href="{PHONE_HREF}">{PHONE}</a>, <a href="{TG}">Telegram</a>, <a href="mailto:{EMAIL}">{EMAIL}</a>'),
+    cards = [
+        ("bolt", "Услуга", f"Срочное лечение от вирусов и восстановление после взлома для {scope}"),
+        ("clock", "Срок", "<b>4–12 часов</b> в большинстве случаев, максимум 24 часа"),
+        ("search", "Диагностика", "<b>Бесплатно</b>: результат и точная цена — за 30 минут"),
+        ("wallet", "Предоплата", "<b>0 ₽</b> — оплата после проверки работающего сайта"),
+        ("shield", "Гарантия", "<b>1 год письменно</b> в договоре: повторный взлом того же типа чиним бесплатно"),
+        ("globe", "Режим и география", "Заявки <b>24/7</b> · вся Россия и СНГ, работаем удалённо"),
     ]
-    items = "".join(f"<dt>{t}</dt><dd>{v}</dd>" for t, v in rows)
+    items = "".join(
+        f'<div class="fact reveal">{FACT_ICONS[ic]}<dt>{t}</dt><dd>{v}</dd></div>'
+        for ic, t, v in cards
+    )
     return f"""
-<section class="light" style="padding:44px 0" id="short">
+<section class="light facts-sec" id="short">
   <div class="container">
-    <h2 style="font-size:1.4rem">Кратко: что, за сколько и как быстро</h2>
-    <dl class="facts">{items}</dl>
-    <p class="fine">Обновлено: <time datetime="{BUILD_DATE}">{BUILD_DATE_RU}</time></p>
+    <div class="wm" data-wm="Факты"><h2>Кратко: что, за сколько <br>и <span class="red">как быстро</span></h2>
+    <p class="lead">Вся суть предложения на одном экране — без мелкого шрифта и звёздочек.</p></div>
+    <div class="facts-wrap">
+      <dl class="facts">{items}</dl>
+      <aside class="facts-cta reveal">
+        <span class="facts-cta-tag">Разово, фиксированная цена</span>
+        <div class="facts-price">от <b>{price_from} ₽</b></div>
+        <p class="facts-price-note">или подписка «Охрана» — 1 990 ₽/мес: мониторинг, бэкапы и защита</p>
+        <a class="btn btn-cta facts-btn" href="#contact">Узнать точную цену — 0 ₽</a>
+        <div class="facts-contacts">
+          <a href="{PHONE_HREF}">{icon('phone')}{PHONE}</a>
+          <a href="{TG}">{icon('telegram')}Telegram</a>
+          <a href="mailto:{EMAIL}">{EMAIL}</a>
+        </div>
+        <p class="fine">Ответим за 10 минут · Обновлено: <time datetime="{BUILD_DATE}">{BUILD_DATE_RU}</time></p>
+      </aside>
+    </div>
   </div>
 </section>
 """
