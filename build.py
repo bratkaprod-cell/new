@@ -437,6 +437,21 @@ STRIP = f"""
 </section>
 """
 
+def quick_form(dark=False):
+    """Мини-форма «Ваш сайт → Отправить»: после проверки URL открывает модалку с предзаполненным сайтом."""
+    cls = "quick-form js-quick-form reveal" + (" qf-dark" if dark else "")
+    return f"""<form class="{cls}" novalidate>
+      <b class="qf-title">Узнайте бесплатно, что с вашим сайтом</b>
+      <div class="qf-row">
+        <input type="url" name="site" placeholder="Ваш сайт, например site.ru" maxlength="200" autocomplete="url" required>
+        <button class="btn btn-cta" type="submit">Отправить</button>
+      </div>
+      <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="form-error" aria-live="polite"></p>
+      <p class="fine">Диагноз и точная цена через 30 минут · 0 ₽ · ни к чему не обязывает</p>
+    </form>"""
+
+
 def pain_section(pains, money_line):
     items = "".join(
         f'<div class="pain reveal"><b>{t}</b><p>{p}</p></div>' for t, p in pains
@@ -448,6 +463,7 @@ def pain_section(pains, money_line):
     <p class="lead">Взлом — это не «технические проблемы». Это прямые потери бизнеса, которые растут с каждым часом:</p></div>
     <div class="pain-list">{items}</div>
     <div class="money reveal">{money_line}</div>
+    {quick_form()}
   </div>
 </section>
 """
@@ -549,6 +565,7 @@ def pricing_section(p_from, cms_name):
       </div>
     </div>
     <p class="center" style="margin-top:22px;color:#777;font-size:.9rem">Оплата по счёту или картой. Для юрлиц — закрывающие документы. Ваши данные и доступы никому не передаём.</p>
+    {quick_form()}
   </div>
 </section>
 """
@@ -790,6 +807,7 @@ def index_page():
     <p class="lead" style="color:#a3a3a3">Под каждую систему — своя методика: мы знаем, где именно прячутся проблемы в вашей CMS.</p></div>
     <div class="grid grid-3" style="margin-top:44px">{cards}
     </div>
+    {quick_form(dark=True)}
   </div>
 </section>
 <section class="light" style="padding-top:0">
@@ -829,6 +847,7 @@ def index_page():
         </ul>
       </div>
     </div>
+    {quick_form()}
   </div>
 </section>
 {process_section()}
