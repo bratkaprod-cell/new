@@ -40,6 +40,8 @@ def org_schema():
         "name": "intelprime.ru",
         "alternateName": "Скорая помощь сайтам intelprime.ru",
         "url": DOMAIN + "/",
+        "logo": DOMAIN + "/assets/logo.png",
+        "image": DOMAIN + "/assets/logo.png",
         "telephone": PHONE.replace(" ", "").replace("-", ""),
         "email": EMAIL,
         "description": "Срочное лечение сайтов от вирусов и восстановление после взлома за 24 часа. Без предоплаты, гарантия 1 год.",
@@ -313,7 +315,9 @@ def base_head(title, desc, page, kw="", schema=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{DOMAIN}/assets/logo.png">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="{DOMAIN}/assets/logo.png">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -372,7 +376,7 @@ def facts_section(price_from, scope):
         ("clock", "Срок", "<b>4–12 часов</b> в большинстве случаев, максимум 24 часа"),
         ("search", "Диагностика", "<b>Бесплатно</b>: результат и точная цена — за 30 минут"),
         ("wallet", "Предоплата", "<b>0 ₽</b> — оплата после проверки работающего сайта"),
-        ("shield", "Гарантия", "<b>1 год письменно</b> в договоре: повторный взлом того же типа чиним бесплатно"),
+        ("shield", "Гарантия", "<b>1 год</b>: повторный взлом того же типа чиним бесплатно"),
         ("globe", "Режим и география", "Заявки <b>24/7</b> · вся Россия и СНГ, работаем удалённо"),
     ]
     items = "".join(
@@ -382,15 +386,15 @@ def facts_section(price_from, scope):
     return f"""
 <section class="light facts-sec" id="short">
   <div class="container">
-    <div class="wm" data-wm="Факты"><h2>Кратко: что, за сколько <br>и <span class="red">как быстро</span></h2>
-    <p class="lead">Вся суть предложения на одном экране — без мелкого шрифта и звёздочек.</p></div>
+    <div class="wm" data-wm="Факты"><h2>Сайт снова работает через 4–12 часов —<br><span class="red">платите только за результат</span></h2>
+    <p class="lead">Сроки, цена и гарантии — на одном экране, без мелкого шрифта и звёздочек.</p></div>
     <div class="facts-wrap">
       <dl class="facts">{items}</dl>
       <aside class="facts-cta reveal">
         <span class="facts-cta-tag">Разово, фиксированная цена</span>
         <div class="facts-price">от <b>{price_from} ₽</b></div>
         <p class="facts-price-note">или подписка «Охрана» — 1 990 ₽/мес: мониторинг, бэкапы и защита</p>
-        <a class="btn btn-cta facts-btn" href="#contact">Узнать точную цену — 0 ₽</a>
+        <a class="btn btn-cta facts-btn" href="index.html#cms">Узнать точную цену — 0 ₽</a>
         <div class="facts-contacts">
           <a href="{PHONE_HREF}">{icon('phone')}{PHONE}</a>
           <a href="mailto:{EMAIL}">{icon('mail')}{EMAIL}</a>
@@ -405,11 +409,11 @@ def facts_section(price_from, scope):
 
 
 STRIP = f"""
-<section class="light strip-sec">
+<section class="strip-sec">
   <div class="container">
     <div class="strip reveal">
       <div class="strip-head">
-        <span class="strip-tag">Наши обязательства — в договоре</span>
+        <span class="strip-tag">Наши обязательства</span>
         <h2>Цифры, за которые мы <span class="strip-accent">отвечаем</span></h2>
       </div>
       <div class="strip-grid">
@@ -538,7 +542,7 @@ def pricing_section(p_from, cms_name):
         <a class="btn btn-outline" href="#contact">Подключить</a>
       </div>
     </div>
-    <p class="center" style="margin-top:22px;color:#777;font-size:.9rem">Оплата по счёту с договором или картой. Для юрлиц — закрывающие документы. Ваши данные и доступы никому не передаём — это прописано в договоре.</p>
+    <p class="center" style="margin-top:22px;color:#777;font-size:.9rem">Оплата по счёту или картой. Для юрлиц — закрывающие документы. Ваши данные и доступы никому не передаём.</p>
   </div>
 </section>
 """
@@ -550,9 +554,9 @@ FAQ = """
     <div style="margin-top:36px">
       <details class="faq-item reveal"><summary>А если вы не сможете починить?</summary><div class="answer">Тогда вы не платите ничего. Предоплаты нет: сначала бесплатная диагностика и точная цена, оплата — после того, как вы проверили работающий сайт.</div></details>
       <details class="faq-item reveal"><summary>У меня нет резервной копии. Это конец?</summary><div class="answer">Нет. Восстанавливаем и без бэкапа: пересобираем сайт из чистых дистрибутивов и переносим ваш контент и базу. Часть контента при необходимости достаём из кэша поисковиков.</div></details>
-      <details class="faq-item reveal"><summary>Взлом повторится?</summary><div class="answer">Мы закрываем причину взлома, а не только следы. Если в течение года сайт взломают тем же способом — чиним бесплатно. Это прописано в договоре.</div></details>
+      <details class="faq-item reveal"><summary>Взлом повторится?</summary><div class="answer">Мы закрываем причину взлома, а не только следы. Если в течение года сайт взломают тем же способом — чиним бесплатно.</div></details>
       <details class="faq-item reveal"><summary>Как быстро вы начнёте?</summary><div class="answer">Отвечаем в течение 10 минут, работаем 24/7. Большинство сайтов возвращаем к жизни за 4–12 часов, максимум — сутки.</div></details>
-      <details class="faq-item reveal"><summary>Придётся давать доступы к хостингу?</summary><div class="answer">Да, без доступа к файлам и базе вылечить сайт нельзя. Работаем по договору: ваши данные и доступы никому не передаются. После работ рекомендуем сменить пароли — поможем всё настроить.</div></details>
+      <details class="faq-item reveal"><summary>Придётся давать доступы к хостингу?</summary><div class="answer">Да, без доступа к файлам и базе вылечить сайт нельзя. Ваши данные и доступы никому не передаются. После работ рекомендуем сменить пароли — поможем всё настроить.</div></details>
       <details class="faq-item reveal"><summary>Хостинг уже заблокировал сайт. Что делать?</summary><div class="answer">Оставьте заявку — свяжемся с поддержкой хостинга от вашего имени, получим логи и снимем блокировку после чистки. Это входит в стоимость.</div></details>
     </div>
   </div>
@@ -602,7 +606,7 @@ FOOTER = """
     <div class="footer-grid footer-grid-3">
       <div class="footer-col footer-brand">
         <a class="logo" href="index.html"><img src="assets/logo.png" alt="IntelPrime — защита от взлома сайтов"></a>
-        <p>Скорая помощь сайтам: срочный ремонт, лечение от вирусов и защита от взлома. Работаем по всей России и СНГ — удалённо, по договору.</p>
+        <p>Скорая помощь сайтам: срочный ремонт, лечение от вирусов и защита от взлома. Работаем по всей России и СНГ — удалённо.</p>
         <div class="footer-work">Работаем 10:00–22:00 МСК<br><span>Экстренные случаи — 24/7</span></div>
       </div>
       <div class="footer-col">
@@ -690,13 +694,13 @@ def cms_page(slug, d):
         <div class="hero-points">
           <span><b>—</b> Без предоплаты</span>
           <span><b>—</b> Гарантия 1 год</span>
-          <span><b>—</b> Работаем по договору</span>
+          <span><b>—</b> Отвечаем за 10 минут</span>
         </div>
       </div>
       <div class="promise reveal visible">
         <h3>Что мы сделаем с вашим {d['short']}</h3>
         <ul>{extras}</ul>
-        <p class="fine">Не починим — не платите. Это условие договора, а не обещание на словах.</p>
+        <p class="fine">Не починим — не платите. Никаких рисков с вашей стороны.</p>
       </div>
     </div>
   </div>
@@ -753,7 +757,7 @@ def index_page():
         <div class="hero-points">
           <span><b>—</b> Без предоплаты</span>
           <span><b>—</b> Гарантия 1 год</span>
-          <span><b>—</b> Работаем по договору</span>
+          <span><b>—</b> Отвечаем за 10 минут</span>
         </div>
       </div>
       <div class="promise promise-v2 reveal visible">
@@ -792,7 +796,7 @@ def index_page():
         <ul>
           <li><span class="vi ok">✓</span><div><b>Находим причину взлома</b><span>всегда — а не только следы</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Чистим файлы и базу данных</b><span>вирусы не возвращаются</span></div></li>
-          <li><span class="vi ok">✓</span><div><b>Письменная гарантия 1 год</b><span>прописана в договоре</span></div></li>
+          <li><span class="vi ok">✓</span><div><b>Гарантия 1 год</b><span>повторный взлом чиним бесплатно</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Предоплата 0 ₽</b><span>платите за работающий сайт</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Повторный взлом исключаем</b><span>закрываем дыру, а не маскируем</span></div></li>
         </ul>
@@ -938,7 +942,7 @@ llms = f"""# intelprime.ru
 - Гарантия 1 год письменно: повторный взлом тем же способом устраняем бесплатно.
 - Восстанавливаем сайты без резервной копии, чистим и файлы, и базу данных.
 - Возвращаем сайт в поиск: снимаем метки в Яндекс Вебмастере и Google Search Console.
-- Работаем по договору, для юрлиц — закрывающие документы.
+- Для юрлиц — закрывающие документы.
 - Контакты: {PHONE}, Telegram {TG}, WhatsApp {WA}, e-mail {EMAIL}.
 
 Страницы:
