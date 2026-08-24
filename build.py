@@ -37,8 +37,8 @@ def org_schema():
     return {
         "@type": "ProfessionalService",
         "@id": DOMAIN + "/#org",
-        "name": "SiteRescue24",
-        "alternateName": "Скорая помощь сайтам SiteRescue24",
+        "name": "intelprime.ru",
+        "alternateName": "Скорая помощь сайтам intelprime.ru",
         "url": DOMAIN + "/",
         "telephone": PHONE.replace(" ", "").replace("-", ""),
         "email": EMAIL,
@@ -91,7 +91,7 @@ def website_schema(page, title, desc):
             "@type": "WebSite",
             "@id": DOMAIN + "/#website",
             "url": DOMAIN + "/",
-            "name": "SiteRescue24",
+            "name": "intelprime.ru",
             "inLanguage": "ru-RU",
             "publisher": {"@id": DOMAIN + "/#org"},
         },
@@ -142,7 +142,7 @@ def page_schema(slug, d, title="", desc=""):
     service = {
         "@type": "Service",
         "name": f"Лечение и восстановление сайта на {d['name']}",
-        "provider": {"@type": "ProfessionalService", "name": "SiteRescue24", "url": DOMAIN + "/"},
+        "provider": {"@type": "ProfessionalService", "name": "intelprime.ru", "url": DOMAIN + "/"},
         "areaServed": "RU",
         "offers": {"@type": "Offer", "price": d["price_from"].replace(" ", "").replace("\u00a0", ""), "priceCurrency": "RUB"},
     }
@@ -308,7 +308,7 @@ def base_head(title, desc, page, kw="", schema=""):
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="SiteRescue24">
+<meta property="og:site_name" content="intelprime.ru">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -608,18 +608,18 @@ FOOTER = """
       <div class="footer-col">
         <b>Контакты</b>
         <a href="%PHONE_HREF%" class="footer-phone">%PHONE%</a>
-        <a href="mailto:help@siterescue24.ru">%MAILICON%help@siterescue24.ru</a>
+        <a href="mailto:help@siterescue24.ru">help@siterescue24.ru</a>
         %SOCIALS%
         <div class="footer-badges"><span>Договор</span><span>Конфиденциально</span><span>Гарантия 1 год</span></div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 SiteRescue24. Все права защищены.</div>
-      <div><a href="#">Политика конфиденциальности</a> · <a href="#">Договор-оферта</a> · <a href="#">Реквизиты</a></div>
+      <div>© 2026 intelprime.ru. Все права защищены.</div>
+      <div><a href="#">Политика конфиденциальности</a></div>
     </div>
   </div>
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
-</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")).replace("%MAILICON%", icon("mail")) + """
+</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")) + """
 <div class="sticky-cta"><a class="btn btn-cta btn-lg" href="#contact">Спасти сайт — диагностика 0 ₽</a></div>
 <div class="modal-overlay" id="lead-modal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -649,7 +649,7 @@ FOOTER = """
 """
 
 def cms_page(slug, d):
-    title = f"Срочный ремонт и лечение сайта на {d['name']} за 24 часа — без предоплаты | SiteRescue24"
+    title = f"Срочный ремонт и лечение сайта на {d['name']} за 24 часа — без предоплаты | intelprime.ru"
     desc = f"Сайт на {d['name']} взломан или не работает? Удалим вирусы и вернём сайт за 24 часа. Цена от {d['price_from']} ₽, без предоплаты, гарантия 1 год. Бесплатная диагностика за 30 минут, работаем 24/7 по всей России."
     head = base_head(
         title=title,
@@ -697,7 +697,7 @@ def cms_page(slug, d):
 {FOOTER}"""
 
 def index_page():
-    title = "Сайт взломали или он не работает? Лечение и восстановление за 24 часа | SiteRescue24"
+    title = "Сайт взломали или он не работает? Лечение и восстановление за 24 часа | intelprime.ru"
     desc = "Срочное лечение сайтов от вирусов и восстановление после взлома: WordPress, WooCommerce, 1С-Битрикс, OpenCart, MODX, Joomla, самописный PHP. Без предоплаты, гарантия 1 год, диагностика бесплатно за 30 минут. Работаем 24/7 по всей России."
     head = base_head(
         title=title,
@@ -774,7 +774,7 @@ def index_page():
     <div class="vs-grid reveal" style="margin-top:44px">
       <div class="vs-card vs-featured">
         <div class="vs-tag">Ваш выбор</div>
-        <h3>SiteRescue24</h3>
+        <h3>intelprime.ru</h3>
         <ul>
           <li><span class="vi ok">✓</span><div><b>Находим причину взлома</b><span>всегда — а не только следы</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Чистим файлы и базу данных</b><span>вирусы не возвращаются</span></div></li>
@@ -849,7 +849,7 @@ with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
 print("written robots.txt")
 
 # llms.txt — краткая машинночитаемая выжимка для языковых моделей
-llms = f"""# SiteRescue24
+llms = f"""# intelprime.ru
 
 > Срочное лечение сайтов от вирусов и восстановление после взлома за 24 часа.
 > Работаем по всей России и СНГ удалённо, заявки принимаем круглосуточно.
