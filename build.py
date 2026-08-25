@@ -12,8 +12,8 @@ TG = "https://t.me/your_tg"
 WA = "https://wa.me/79000000000"
 MAX = "https://max.ru/your_max"
 VK = "https://vk.com/your_vk"
-EMAIL = "help@siterescue24.ru"
-DOMAIN = "https://siterescue24.ru"
+EMAIL = "help@intelprime.ru"
+DOMAIN = "https://intelprime.ru"
 BUILD_DATE = datetime.date.today().isoformat()
 BUILD_DATE_RU = datetime.date.today().strftime("%d.%m.%Y")
 
@@ -647,7 +647,7 @@ FOOTER = """
       <div class="footer-col">
         <b>Контакты</b>
         <a href="%PHONE_HREF%" class="footer-phone">%PHONE%</a>
-        <a href="mailto:help@siterescue24.ru">help@siterescue24.ru</a>
+        <a href="mailto:%EMAIL%">%EMAIL%</a>
         %SOCIALS%
         <div class="footer-badges"><span>Без предоплаты</span><span>Конфиденциально</span><span>Гарантия 1 год</span></div>
       </div>
@@ -658,7 +658,7 @@ FOOTER = """
     </div>
   </div>
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
-</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")) + """
+</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%EMAIL%", EMAIL).replace("%SOCIALS%", socials("socials footer-socials")) + """
 <div class="sticky-cta"><a class="btn btn-cta btn-lg" href="#contact">Спасти сайт — диагностика 0 ₽</a></div>
 <div class="modal-overlay" id="lead-modal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">

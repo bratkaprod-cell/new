@@ -64,4 +64,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://siterescue24.ru/sitemap.xml
+Sitemap: https://intelprime.ru/sitemap.xml

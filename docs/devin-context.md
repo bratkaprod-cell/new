@@ -163,7 +163,8 @@ t.me/your_tg, wa.me/79000000000, max.ru/your_max, vk.com/your_vk), замени�
   вписать токены в `lead-config.php` (инструкция в комментариях файла).
 
 - Заменить плейсхолдеры контактов на реальные (телефон, Telegram, WhatsApp, MAX, VK).
-- Домен: владелец решил пока оставить siterescue24.ru (`DOMAIN` и email не менять).
+- Домен: владелец подтвердил intelprime.ru — в сессии 5 `DOMAIN` и email заменены на intelprime.ru
+  (canonical, sitemap, robots, llms.txt, schema.org, LEAD_EMAIL_FROM).
 - Вписать юридические реквизиты оператора в privacy.html (через build.py).
 - Смержить PR #1 в main, чтобы всё попало в основную ветку.
 - В `cms/textolite/` лежит CMS Textolite; аудит безопасности — `docs/textolite-audit.md`,

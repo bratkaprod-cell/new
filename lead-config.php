@@ -6,7 +6,7 @@
 // --- Почта: куда приходят заявки ---
 define('LEAD_EMAIL_TO', 'fox6261@mail.ru');
 // От какого адреса отправлять (лучше ящик на домене сайта, иначе письма могут падать в спам)
-define('LEAD_EMAIL_FROM', 'noreply@siterescue24.ru');
+define('LEAD_EMAIL_FROM', 'noreply@intelprime.ru');
 
 // --- Telegram-уведомления ---
 // 1) Создайте бота через @BotFather (/newbot) и вставьте его токен сюда:

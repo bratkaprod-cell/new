@@ -13,13 +13,13 @@
 - Восстанавливаем сайты без резервной копии, чистим и файлы, и базу данных.
 - Возвращаем сайт в поиск: снимаем метки в Яндекс Вебмастере и Google Search Console.
 - Для юрлиц — закрывающие документы.
-- Контакты: +7 900 000-00-00, Telegram https://t.me/your_tg, WhatsApp https://wa.me/79000000000, e-mail help@siterescue24.ru.
+- Контакты: +7 900 000-00-00, Telegram https://t.me/your_tg, WhatsApp https://wa.me/79000000000, e-mail help@intelprime.ru.
 
 Страницы:
-- [Главная](https://siterescue24.ru/): все платформы, цены, порядок работы, ответы на вопросы.
-- [WordPress и WooCommerce](https://siterescue24.ru/wordpress.html): лечение и восстановление, от 6 900 ₽.
-- [1С-Битрикс](https://siterescue24.ru/bitrix.html): лечение и восстановление, от 14 900 ₽.
-- [OpenCart](https://siterescue24.ru/opencart.html): лечение и восстановление, от 9 900 ₽.
-- [MODX](https://siterescue24.ru/modx.html): лечение и восстановление, от 9 900 ₽.
-- [Joomla](https://siterescue24.ru/joomla.html): лечение и восстановление, от 7 900 ₽.
-- [Самописные PHP-проекты](https://siterescue24.ru/php.html): лечение и восстановление, от 12 900 ₽.
+- [Главная](https://intelprime.ru/): все платформы, цены, порядок работы, ответы на вопросы.
+- [WordPress и WooCommerce](https://intelprime.ru/wordpress.html): лечение и восстановление, от 6 900 ₽.
+- [1С-Битрикс](https://intelprime.ru/bitrix.html): лечение и восстановление, от 14 900 ₽.
+- [OpenCart](https://intelprime.ru/opencart.html): лечение и восстановление, от 9 900 ₽.
+- [MODX](https://intelprime.ru/modx.html): лечение и восстановление, от 9 900 ₽.
+- [Joomla](https://intelprime.ru/joomla.html): лечение и восстановление, от 7 900 ₽.
+- [Самописные PHP-проекты](https://intelprime.ru/php.html): лечение и восстановление, от 12 900 ₽.
