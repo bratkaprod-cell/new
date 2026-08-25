@@ -40,9 +40,9 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .nav{display:flex;align-items:center;gap:clamp(8px,1vw,14px);height:66px;flex-wrap:nowrap}
 .logo{display:flex;align-items:center;flex-shrink:0}
 .logo img{height:36px;width:auto;display:block}
-.nav-links{display:flex;gap:clamp(0px,.3vw,4px);align-items:center;font-size:clamp(.78rem,.4vw + .55rem,.92rem);font-weight:700;color:var(--muted-d);margin-left:auto;white-space:nowrap}
-.nav-links a{position:relative;padding:9px clamp(7px,.7vw,10px);border-radius:10px;transition:color .15s,background .15s}
-.nav-links a::after{content:"";position:absolute;left:clamp(7px,.7vw,10px);right:clamp(7px,.7vw,10px);bottom:4px;height:2px;border-radius:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.nav-links{display:flex;gap:clamp(0px,.3vw,4px);align-items:center;font-size:clamp(.78rem,.4vw + .55rem,.92rem);font-weight:700;color:var(--muted-d);margin-left:clamp(4px,.8vw,10px);white-space:nowrap}
+.nav-links a{position:relative;padding:9px clamp(7px,.65vw,9px);border-radius:10px;transition:color .15s,background .15s}
+.nav-links a::after{content:"";position:absolute;left:clamp(7px,.65vw,9px);right:clamp(7px,.65vw,9px);bottom:4px;height:2px;border-radius:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .2s}
 .nav-links a:hover{color:var(--white);background:rgba(255,255,255,.07)}
 .nav-links a:hover::after{transform:scaleX(1)}
 .nav-links .nav-hot{color:var(--yellow)}
@@ -62,7 +62,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .soc-vk{background:#0077FF}
 .soc-ph{background:linear-gradient(135deg,#34D399,#22C55E)}
 .nav-socials{margin-left:auto}
-.nav-links~.nav-socials{margin-left:0}
+.nav-links~.nav-socials{margin-left:auto}
 .nav-socials a{width:32px;height:32px;border-radius:8px}
 .nav-socials .icn{width:16px;height:16px}
 
@@ -91,11 +91,11 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .nav-phone-icon .icn{width:19px;height:19px}
 
 @media(min-width:901px){.mobile-menu,.mm-overlay{display:none !important}}
-@media(max-width:1360px){.nav-socials{display:none}}
+@media(max-width:1360px){.nav-socials{display:none}.nav-phone{margin-left:auto}}
 @media(max-width:1150px){.nav .nav-cta{padding:11px 14px;font-size:.78rem;letter-spacing:.02em}}
 @media(max-width:1080px){
   .nav-phone{display:none}
-  .nav-phone-icon{display:flex;width:36px;height:36px}
+  .nav-phone-icon{display:flex;width:36px;height:36px;margin-left:auto}
 }
 @media(max-width:900px){
   .nav-links{display:none}
