@@ -10,10 +10,10 @@ PHONE = "+7 900 219-19-70"
 PHONE_HREF = "tel:+79002191970"
 TG = "https://t.me/intel_prime"
 WA = "https://wa.me/79082857007"
-MAX = "https://max.ru/+79203312032"
+MAX = "https://max.ru/u/f9LHodD0cOK1e9zbvqqBwfyp-v51tQbrtZB05QeizJUBPKNbS9ZXcv-oo0c"
 VK = "https://vk.com/intel_prime"
 EMAIL = "help@intelprime.ru"
-DOMAIN = "https://intelprime.ru"
+DOMAIN = "https://intel-prime.ru"
 BUILD_DATE = datetime.date.today().isoformat()
 BUILD_DATE_RU = datetime.date.today().strftime("%d.%m.%Y")
 
@@ -27,10 +27,10 @@ def icon(name, cls="icn"):
 def socials(cls="socials", phone=True):
     phone_link = f'\n      <a class="soc-ph" href="{PHONE_HREF}" aria-label="Позвонить" title="Позвонить">{icon("phone")}</a>' if phone else ""
     return f"""<div class="{cls}">
-      <a class="soc-tg" href="{TG}" aria-label="Telegram" title="Telegram">{icon('telegram')}</a>
-      <a class="soc-wa" href="{WA}" aria-label="WhatsApp" title="WhatsApp">{icon('whatsapp')}</a>
-      <a class="soc-max" href="{MAX}" aria-label="MAX" title="MAX">{icon('max')}</a>
-      <a class="soc-vk" href="{VK}" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>{phone_link}
+      <a class="soc-tg" href="{TG}" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">{icon('telegram')}</a>
+      <a class="soc-wa" href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">{icon('whatsapp')}</a>
+      <a class="soc-max" href="{MAX}" target="_blank" rel="noopener" aria-label="MAX" title="MAX">{icon('max')}</a>
+      <a class="soc-vk" href="{VK}" target="_blank" rel="noopener" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>{phone_link}
     </div>"""
 
 def org_schema():
@@ -337,7 +337,7 @@ def base_head(title, desc, page, kw="", schema=""):
     <nav class="nav-links">
       <a href="index.html#cms">Платформы</a>
       <a href="{page}#process">Как работаем</a>
-      <a href="{page}#pricing">Цены</a>
+      <a class="nav-hot" href="{page}#pricing">Цены — от 6 900 ₽</a>
       <a href="{page}#faq">Вопросы</a>
     </nav>
     {socials('socials nav-socials', phone=False)}
@@ -625,7 +625,7 @@ FOOTER = """
         <p>Напишите в мессенджер — отвечаем за 10 минут, 24/7</p>
       </div>
       <div class="footer-cta-btns">
-        <a class="btn btn-cta" href="%TG%">Telegram</a>
+        <a class="btn btn-cta" href="%TG%" target="_blank" rel="noopener">Telegram</a>
         <a class="btn btn-outline" href="%PHONE_HREF%">%PHONE%</a>
       </div>
     </div>

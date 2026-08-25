@@ -40,8 +40,13 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .nav{display:flex;align-items:center;gap:22px;height:66px;flex-wrap:nowrap}
 .logo{display:flex;align-items:center;flex-shrink:0}
 .logo img{height:36px;width:auto;display:block}
-.nav-links{display:flex;gap:20px;font-size:.92rem;font-weight:600;color:var(--muted-d);margin-left:auto;white-space:nowrap}
-.nav-links a:hover{color:var(--white)}
+.nav-links{display:flex;gap:4px;align-items:center;font-size:.92rem;font-weight:700;color:var(--muted-d);margin-left:auto;white-space:nowrap}
+.nav-links a{position:relative;padding:9px 13px;border-radius:10px;transition:color .15s,background .15s}
+.nav-links a::after{content:"";position:absolute;left:13px;right:13px;bottom:4px;height:2px;border-radius:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.07)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-links .nav-hot{color:var(--yellow)}
+.nav-links .nav-hot:hover{color:var(--yellow);background:rgba(255,212,0,.1)}
 .nav-phone{font-weight:800;font-size:.95rem;white-space:nowrap;transition:color .15s}
 .nav-phone:hover{color:var(--yellow)}
 .logo{white-space:nowrap}

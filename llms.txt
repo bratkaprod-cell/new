@@ -16,10 +16,10 @@
 - Контакты: +7 900 219-19-70, Telegram https://t.me/intel_prime, WhatsApp https://wa.me/79082857007, e-mail help@intelprime.ru.
 
 Страницы:
-- [Главная](https://intelprime.ru/): все платформы, цены, порядок работы, ответы на вопросы.
-- [WordPress и WooCommerce](https://intelprime.ru/wordpress.html): лечение и восстановление, от 6 900 ₽.
-- [1С-Битрикс](https://intelprime.ru/bitrix.html): лечение и восстановление, от 14 900 ₽.
-- [OpenCart](https://intelprime.ru/opencart.html): лечение и восстановление, от 9 900 ₽.
-- [MODX](https://intelprime.ru/modx.html): лечение и восстановление, от 9 900 ₽.
-- [Joomla](https://intelprime.ru/joomla.html): лечение и восстановление, от 7 900 ₽.
-- [Самописные PHP-проекты](https://intelprime.ru/php.html): лечение и восстановление, от 12 900 ₽.
+- [Главная](https://intel-prime.ru/): все платформы, цены, порядок работы, ответы на вопросы.
+- [WordPress и WooCommerce](https://intel-prime.ru/wordpress.html): лечение и восстановление, от 6 900 ₽.
+- [1С-Битрикс](https://intel-prime.ru/bitrix.html): лечение и восстановление, от 14 900 ₽.
+- [OpenCart](https://intel-prime.ru/opencart.html): лечение и восстановление, от 9 900 ₽.
+- [MODX](https://intel-prime.ru/modx.html): лечение и восстановление, от 9 900 ₽.
+- [Joomla](https://intel-prime.ru/joomla.html): лечение и восстановление, от 7 900 ₽.
+- [Самописные PHP-проекты](https://intel-prime.ru/php.html): лечение и восстановление, от 12 900 ₽.
