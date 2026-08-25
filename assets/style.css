@@ -91,11 +91,18 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.
 .nav-phone-icon .icn{width:19px;height:19px}
 
 @media(min-width:901px){.mobile-menu,.mm-overlay{display:none !important}}
-@media(max-width:1360px){.nav-socials{display:none}.nav-phone{margin-left:auto}}
-@media(max-width:1150px){.nav .nav-cta{padding:11px 14px;font-size:.78rem;letter-spacing:.02em}}
-@media(max-width:1080px){
+@media(max-width:1280px){
   .nav-phone{display:none}
-  .nav-phone-icon{display:flex;width:36px;height:36px;margin-left:auto}
+  .nav-phone-icon{display:flex;width:36px;height:36px}
+}
+@media(max-width:1150px){
+  .nav .nav-cta{padding:11px 14px;font-size:.78rem;letter-spacing:.02em}
+  .nav-socials a{width:28px;height:28px;border-radius:7px}
+  .nav-socials .icn{width:14px;height:14px}
+}
+@media(max-width:1000px){
+  .nav-socials{display:none}
+  .nav-phone-icon{margin-left:auto}
 }
 @media(max-width:900px){
   .nav-links{display:none}
