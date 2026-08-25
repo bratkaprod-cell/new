@@ -6,12 +6,12 @@ import os
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-PHONE = "+7 900 000-00-00"
-PHONE_HREF = "tel:+79000000000"
-TG = "https://t.me/your_tg"
-WA = "https://wa.me/79000000000"
-MAX = "https://max.ru/your_max"
-VK = "https://vk.com/your_vk"
+PHONE = "+7 900 219-19-70"
+PHONE_HREF = "tel:+79002191970"
+TG = "https://t.me/intel_prime"
+WA = "https://wa.me/79082857007"
+MAX = "https://max.ru/+79203312032"
+VK = "https://vk.com/intel_prime"
 EMAIL = "help@intelprime.ru"
 DOMAIN = "https://intelprime.ru"
 BUILD_DATE = datetime.date.today().isoformat()
