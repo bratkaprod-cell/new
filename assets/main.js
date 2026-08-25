@@ -23,11 +23,16 @@ const mmOverlay = document.getElementById('mm-overlay');
 const mmClose = document.getElementById('mm-close');
 if (burger && mobileMenu) {
   const setMenu = (open) => {
+    if (!open && mobileMenu.contains(document.activeElement)) {
+      document.activeElement.blur();
+      burger.focus();
+    }
     mobileMenu.classList.toggle('open', open);
     if (mmOverlay) mmOverlay.classList.toggle('open', open);
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
     mobileMenu.setAttribute('aria-hidden', String(!open));
+    mobileMenu.inert = !open;
     lockScroll(open);
   };
   burger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
@@ -54,12 +59,17 @@ if (modal) {
     if (cmsEl) cmsEl.textContent = cms ? 'на ' + cms : '';
     box.classList.remove('sent');
     modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    modal.inert = false;
     lockScroll(true);
     const first = modal.querySelector('input');
     if (first) setTimeout(() => first.focus(), 250);
   };
   const closeModal = () => {
+    if (modal.contains(document.activeElement)) document.activeElement.blur();
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.inert = true;
     lockScroll(false);
   };
   document.querySelectorAll('.js-open-modal').forEach((btn) => {

@@ -348,7 +348,7 @@ def base_head(title, desc, page, kw="", schema=""):
   </div>
 </header>
 <div class="mm-overlay" id="mm-overlay"></div>
-<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <div class="mm-head">
       <a class="logo" href="index.html"><img src="assets/logo.png" alt="IntelPrime — защита от взлома сайтов"></a>
       <button class="mm-close" id="mm-close" aria-label="Закрыть меню">✕</button>
@@ -660,7 +660,7 @@ FOOTER = """
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
 </footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%EMAIL%", EMAIL).replace("%SOCIALS%", socials("socials footer-socials")) + """
 <div class="sticky-cta"><a class="btn btn-cta btn-lg" href="#contact">Спасти сайт — диагностика 0 ₽</a></div>
-<div class="modal-overlay" id="lead-modal" aria-hidden="true">
+<div class="modal-overlay" id="lead-modal" aria-hidden="true" inert>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
     <div class="modal-badge"><span class="pulse"></span>Ответим за 10 минут</div>
