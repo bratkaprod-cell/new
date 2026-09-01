@@ -307,7 +307,7 @@ def base_head(title, desc, page, kw="", schema=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com https://mc.webvisor.org https://mc.webvisor.com wss://mc.yandex.ru wss://mc.yandex.com; frame-src https://mc.yandex.ru https://mc.yandex.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -688,6 +688,8 @@ FOOTER = """
   <button class="btn btn-cta cookie-btn" id="cookie-accept" type="button">Принять</button>
 </div>
 <script src="assets/main.js"></script>
+<script src="assets/metrika.js"></script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112155075" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 </body>
 </html>
 """

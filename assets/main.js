@@ -332,6 +332,7 @@ const sendLead = (form, cms, onSuccess) => {
     .then((r) => r.json())
     .then((res) => {
       if (!res.ok) throw new Error(res.error || 'delivery');
+      if (typeof ym === 'function') ym(112155075, 'reachGoal', 'lead_form');
       if (onSuccess) onSuccess();
       if (btn) {
         btn.textContent = 'Заявка отправлена ✓';
