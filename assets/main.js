@@ -23,11 +23,16 @@ const mmOverlay = document.getElementById('mm-overlay');
 const mmClose = document.getElementById('mm-close');
 if (burger && mobileMenu) {
   const setMenu = (open) => {
+    if (!open && mobileMenu.contains(document.activeElement)) {
+      document.activeElement.blur();
+      burger.focus();
+    }
     mobileMenu.classList.toggle('open', open);
     if (mmOverlay) mmOverlay.classList.toggle('open', open);
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
     mobileMenu.setAttribute('aria-hidden', String(!open));
+    mobileMenu.inert = !open;
     lockScroll(open);
   };
   burger.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
@@ -54,21 +59,32 @@ if (modal) {
     if (cmsEl) cmsEl.textContent = cms ? 'на ' + cms : '';
     box.classList.remove('sent');
     modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    modal.inert = false;
     lockScroll(true);
     const first = modal.querySelector('input');
     if (first) setTimeout(() => first.focus(), 250);
   };
   const closeModal = () => {
+    if (modal.contains(document.activeElement)) document.activeElement.blur();
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.inert = true;
     lockScroll(false);
   };
-  document.querySelectorAll('.js-open-modal').forEach((btn) =>
+  document.querySelectorAll('.js-open-modal').forEach((btn) => {
     btn.addEventListener('click', (ev) => {
       ev.preventDefault();
       ev.stopPropagation();
       openModal(btn.dataset.cms || '');
-    })
-  );
+    });
+    btn.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        openModal(btn.dataset.cms || '');
+      }
+    });
+  });
   modal.addEventListener('click', (ev) => {
     if (ev.target === modal) closeModal();
   });
@@ -82,10 +98,43 @@ if (modal) {
     modalForm.addEventListener('submit', (ev) => {
       ev.preventDefault();
       if (!validateLeadForm(modalForm)) return;
-      box.classList.add('sent');
+      const cms = cmsEl ? cmsEl.textContent.replace(/^на\s+/, '') : '';
+      sendLead(modalForm, cms, () => box.classList.add('sent'));
     });
   }
+
 }
+
+// quick "site + phone" forms: send the lead right away, no popup
+document.querySelectorAll('.js-quick-form').forEach((qf) => {
+  qf.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    showError(qf, '');
+    const hp = qf.querySelector('.hp-field');
+    if (hp && hp.value) return; // honeypot: silently drop bots
+    if (Date.now() - PAGE_LOADED_AT < 3000) {
+      showError(qf, 'Подождите пару секунд и попробуйте ещё раз.');
+      return;
+    }
+    const site = qf.querySelector('input[name="site"]');
+    if (!validSite(site.value)) {
+      showError(qf, 'Введите корректный адрес сайта, например site.ru');
+      site.focus();
+      return;
+    }
+    const phone = qf.querySelector('input.js-phone');
+    if (phone && !validPhone(phone.value)) {
+      showError(qf, 'Введите корректный номер: +7 (XXX) XXX-XX-XX');
+      phone.focus();
+      return;
+    }
+    if (!submitsAllowed()) {
+      showError(qf, 'Слишком много заявок. Позвоните нам или напишите в мессенджер.');
+      return;
+    }
+    sendLead(qf, '');
+  });
+});
 
 // --- phone mask: +7 (XXX) XXX-XX-XX ---
 const formatPhone = (digits) => {
@@ -109,16 +158,49 @@ const phoneDigits = (value) => {
   return d;
 };
 document.querySelectorAll('input.js-phone').forEach((inp) => {
-  const nationalDigits = () => {
-    let d = inp.value.replace(/\D/g, '');
+  const nationalDigits = (value) => {
+    let d = value.replace(/\D/g, '');
     if (d.startsWith('8')) d = '7' + d.slice(1);
     if (d.startsWith('7')) d = d.slice(1);
     return d.slice(0, 10);
   };
-  const setValue = (d) => {
+  // how many national digits are before a caret position in the formatted value
+  const digitIndexAt = (pos) => {
+    const total = nationalDigits(inp.value).length;
+    let count = 0;
+    let skippedPrefix = false;
+    for (let i = 0; i < Math.min(pos, inp.value.length); i++) {
+      if (/\d/.test(inp.value[i])) {
+        if (!skippedPrefix && inp.value[i] === '7' && inp.value.slice(0, i + 1).replace(/\D/g, '') === '7') {
+          skippedPrefix = true;
+          continue;
+        }
+        count++;
+      }
+    }
+    return Math.min(count, total);
+  };
+  // caret position in the formatted value right after the n-th national digit
+  const caretForDigit = (n) => {
+    if (n <= 0) return Math.min(4, inp.value.length);
+    let count = 0;
+    let skippedPrefix = false;
+    for (let i = 0; i < inp.value.length; i++) {
+      if (/\d/.test(inp.value[i])) {
+        if (!skippedPrefix && inp.value[i] === '7' && inp.value.slice(0, i + 1).replace(/\D/g, '') === '7') {
+          skippedPrefix = true;
+          continue;
+        }
+        count++;
+        if (count === n) return i + 1;
+      }
+    }
+    return inp.value.length;
+  };
+  const setValue = (d, caretDigit) => {
     inp.value = formatPhone('7' + d);
-    const end = inp.value.length;
-    inp.setSelectionRange(end, end);
+    const pos = caretDigit === undefined ? inp.value.length : caretForDigit(caretDigit);
+    inp.setSelectionRange(pos, pos);
   };
   inp.addEventListener('focus', () => {
     if (!inp.value) inp.value = '+7 (';
@@ -126,20 +208,26 @@ document.querySelectorAll('input.js-phone').forEach((inp) => {
   inp.addEventListener('blur', () => {
     if (inp.value === '+7 (' || inp.value === '+7') inp.value = '';
   });
-  // digits are always appended in order, regardless of caret position
   inp.addEventListener('keydown', (ev) => {
     if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    if (ev.key.length !== 1 && ev.key !== 'Backspace' && ev.key !== 'Delete') return;
+    ev.preventDefault();
+    const d = nationalDigits(inp.value);
+    const selStart = digitIndexAt(inp.selectionStart);
+    const selEnd = digitIndexAt(inp.selectionEnd);
+    const hasSelection = inp.selectionEnd > inp.selectionStart;
     if (ev.key.length === 1) {
-      ev.preventDefault();
-      if (/\d/.test(ev.key)) {
-        const d = nationalDigits();
-        if (d.length < 10) setValue(d + ev.key);
-      }
-    } else if (ev.key === 'Backspace' || ev.key === 'Delete') {
-      ev.preventDefault();
-      const d = nationalDigits();
-      if (d.length > 0) setValue(d.slice(0, -1));
-      else inp.value = '+7 (';
+      if (!/\d/.test(ev.key)) return;
+      const next = d.slice(0, selStart) + ev.key + d.slice(hasSelection ? selEnd : selStart);
+      if (next.length <= 10) setValue(next, selStart + 1);
+      else if (!hasSelection && selStart < d.length) setValue(d.slice(0, selStart) + ev.key + d.slice(selStart + 1), selStart + 1);
+    } else if (ev.key === 'Backspace') {
+      if (hasSelection) setValue(d.slice(0, selStart) + d.slice(selEnd), selStart);
+      else if (selStart > 0) setValue(d.slice(0, selStart - 1) + d.slice(selStart), selStart - 1);
+      else if (!d.length) inp.value = '+7 (';
+    } else {
+      if (hasSelection) setValue(d.slice(0, selStart) + d.slice(selEnd), selStart);
+      else if (selStart < d.length) setValue(d.slice(0, selStart) + d.slice(selStart + 1), selStart);
     }
   });
   // paste / autofill / mobile keyboards
@@ -232,15 +320,57 @@ const validateLeadForm = (form) => {
   return true;
 };
 
+// --- real lead delivery: POST to send-lead.php (email + Telegram + VK) ---
+const sendLead = (form, cms, onSuccess) => {
+  const btn = form.querySelector('button[type="submit"]');
+  const prevText = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
+  const data = new FormData(form);
+  if (cms) data.append('cms', cms);
+  data.append('page', location.pathname + location.hash);
+  fetch('send-lead.php', { method: 'POST', body: data })
+    .then((r) => r.json())
+    .then((res) => {
+      if (!res.ok) throw new Error(res.error || 'delivery');
+      if (typeof ym === 'function') ym(112155075, 'reachGoal', 'lead_form');
+      if (onSuccess) onSuccess();
+      if (btn) {
+        btn.textContent = 'Заявка отправлена ✓';
+        btn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
+      }
+    })
+    .catch(() => {
+      if (btn) { btn.disabled = false; btn.textContent = prevText; }
+      showError(form, 'Не удалось отправить. Позвоните нам или напишите в мессенджер.');
+    });
+};
+
 // form
 const form = document.getElementById('lead-form');
 if (form) {
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
     if (!validateLeadForm(form)) return;
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Заявка отправлена ✓';
-    btn.disabled = true;
-    btn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
+    sendLead(form, '');
   });
+}
+
+// cookie consent
+const cookieBar = document.getElementById('cookie-bar');
+if (cookieBar) {
+  const COOKIE_KEY = 'ip_cookie_ok';
+  let accepted = false;
+  try { accepted = localStorage.getItem(COOKIE_KEY) === '1'; } catch (e) { accepted = false; }
+  if (!accepted) {
+    setTimeout(() => {
+      cookieBar.classList.add('show');
+      cookieBar.setAttribute('aria-hidden', 'false');
+    }, 1500);
+    const btn = document.getElementById('cookie-accept');
+    if (btn) btn.addEventListener('click', () => {
+      try { localStorage.setItem(COOKIE_KEY, '1'); } catch (e) {}
+      cookieBar.classList.remove('show');
+      cookieBar.setAttribute('aria-hidden', 'true');
+    });
+  }
 }

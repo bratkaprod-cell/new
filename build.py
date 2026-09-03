@@ -6,14 +6,14 @@ import os
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-PHONE = "+7 900 000-00-00"
-PHONE_HREF = "tel:+79000000000"
-TG = "https://t.me/your_tg"
-WA = "https://wa.me/79000000000"
-MAX = "https://max.ru/your_max"
-VK = "https://vk.com/your_vk"
-EMAIL = "help@siterescue24.ru"
-DOMAIN = "https://siterescue24.ru"
+PHONE = "+7 900 219-19-70"
+PHONE_HREF = "tel:+79002191970"
+TG = "https://t.me/intel_prime"
+WA = "https://wa.me/79082857007"
+MAX = "https://max.ru/u/f9LHodD0cOK1e9zbvqqBwfyp-v51tQbrtZB05QeizJUBPKNbS9ZXcv-oo0c"
+VK = "https://vk.com/intel_prime"
+EMAIL = "help@intelprime.ru"
+DOMAIN = "https://intel-prime.ru"
 BUILD_DATE = datetime.date.today().isoformat()
 BUILD_DATE_RU = datetime.date.today().strftime("%d.%m.%Y")
 
@@ -24,22 +24,24 @@ def icon(name, cls="icn"):
     return svg.replace("<svg ", f'<svg class="{cls}" aria-hidden="true" ', 1)
 
 
-def socials(cls="socials"):
+def socials(cls="socials", phone=True):
+    phone_link = f'\n      <a class="soc-ph" href="{PHONE_HREF}" aria-label="Позвонить" title="Позвонить">{icon("phone")}</a>' if phone else ""
     return f"""<div class="{cls}">
-      <a class="soc-tg" href="{TG}" aria-label="Telegram" title="Telegram">{icon('telegram')}</a>
-      <a class="soc-wa" href="{WA}" aria-label="WhatsApp" title="WhatsApp">{icon('whatsapp')}</a>
-      <a class="soc-max" href="{MAX}" aria-label="MAX" title="MAX">{icon('max')}</a>
-      <a class="soc-vk" href="{VK}" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>
-      <a class="soc-ph" href="{PHONE_HREF}" aria-label="Позвонить" title="Позвонить">{icon('phone')}</a>
+      <a class="soc-tg" href="{TG}" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">{icon('telegram')}</a>
+      <a class="soc-wa" href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">{icon('whatsapp')}</a>
+      <a class="soc-max" href="{MAX}" target="_blank" rel="noopener" aria-label="MAX" title="MAX">{icon('max')}</a>
+      <a class="soc-vk" href="{VK}" target="_blank" rel="noopener" aria-label="ВКонтакте" title="ВКонтакте">{icon('vk')}</a>{phone_link}
     </div>"""
 
 def org_schema():
     return {
         "@type": "ProfessionalService",
         "@id": DOMAIN + "/#org",
-        "name": "SiteRescue24",
-        "alternateName": "Скорая помощь сайтам SiteRescue24",
+        "name": "intelprime.ru",
+        "alternateName": "Скорая помощь сайтам intelprime.ru",
         "url": DOMAIN + "/",
+        "logo": DOMAIN + "/assets/logo.png",
+        "image": DOMAIN + "/assets/logo.png",
         "telephone": PHONE.replace(" ", "").replace("-", ""),
         "email": EMAIL,
         "description": "Срочное лечение сайтов от вирусов и восстановление после взлома за 24 часа. Без предоплаты, гарантия 1 год.",
@@ -91,7 +93,7 @@ def website_schema(page, title, desc):
             "@type": "WebSite",
             "@id": DOMAIN + "/#website",
             "url": DOMAIN + "/",
-            "name": "SiteRescue24",
+            "name": "intelprime.ru",
             "inLanguage": "ru-RU",
             "publisher": {"@id": DOMAIN + "/#org"},
         },
@@ -142,7 +144,7 @@ def page_schema(slug, d, title="", desc=""):
     service = {
         "@type": "Service",
         "name": f"Лечение и восстановление сайта на {d['name']}",
-        "provider": {"@type": "ProfessionalService", "name": "SiteRescue24", "url": DOMAIN + "/"},
+        "provider": {"@type": "ProfessionalService", "name": "intelprime.ru", "url": DOMAIN + "/"},
         "areaServed": "RU",
         "offers": {"@type": "Offer", "price": d["price_from"].replace(" ", "").replace("\u00a0", ""), "priceCurrency": "RUB"},
     }
@@ -164,6 +166,7 @@ CMS = {
         "kw": "лечение сайта wordpress от вирусов, взломали сайт wordpress, редирект на чужой сайт wordpress, восстановление woocommerce",
         "tag": "самая массовая CMS",
         "price_from": "6 900",
+        "card": "Редиректы, спам в выдаче, белый экран? Вычистим WordPress до последнего плагина и вернём заявки уже сегодня.",
         "hero": "Сайт на WordPress не работает?<br><em>Вернём его за 24 часа</em>",
         "sub": "Редиректы на чужие сайты, спам в поиске, белый экран, блокировка хостинга — каждый час это минус заявки и минус деньги. Найдём причину, вычистим заражение и защитим, чтобы не повторилось.",
         "pains": [
@@ -186,8 +189,9 @@ CMS = {
         "kw": "лечение сайта битрикс от вирусов, взломали сайт 1с-битрикс, вирус на битрикс, восстановление сайта битрикс",
         "tag": "магазины и корпорации",
         "price_from": "14 900",
+        "card": "Каждый час простоя магазина — минус выручка. Поднимем Битрикс и обмен с 1С, не останавливая продажи.",
         "hero": "Магазин на Битрикс лежит?<br><em>Каждый час — минус выручка</em>",
-        "sub": "Заказы не проходят, обмен с 1С сломан, в админке чужие «агенты». Поднимем сайт без остановки продаж, сохраним интеграцию с 1С. Договор, закрывающие документы, полная конфиденциальность.",
+        "sub": "Заказы не проходят, обмен с 1С сломан, в админке чужие «агенты». Поднимем сайт без остановки продаж, сохраним интеграцию с 1С. Закрывающие документы, полная конфиденциальность.",
         "pains": [
             ("Продажи остановились", "Клиенты не могут оформить заказ и уходят к конкурентам"),
             ("Обмен с 1С сломался", "Остатки и цены не обновляются — менеджеры работают вслепую"),
@@ -208,6 +212,7 @@ CMS = {
         "kw": "лечение сайта opencart от вирусов, взломали магазин opencart, вирус opencart, спам заказы opencart",
         "tag": "интернет-магазины",
         "price_from": "9 900",
+        "card": "Крадут карты покупателей и сыплются спам-заказы? Найдём лазейку, закроем её и вернём продажи за 1 день.",
         "hero": "Магазин на OpenCart заражён?<br><em>Вернём продажи за 1 день</em>",
         "sub": "Крадут данные карт покупателей, тысячи спам-заказов, магазин еле грузится. Уберём заражение из файлов, базы и кэша модификаторов — и закроем лазейку, через которую зашли.",
         "pains": [
@@ -230,6 +235,7 @@ CMS = {
         "kw": "лечение сайта modx от вирусов, взломали сайт modx, вирус modx revolution, восстановление сайта modx",
         "tag": "Revolution и Evolution",
         "price_from": "9 900",
+        "card": "«Мы с MODX не работаем» — слышали? Мы работаем. Вычистим код даже из базы и вернём сайт в поиск.",
         "hero": "Сайт на MODX взломан или упал?<br><em>Мы знаем MODX изнутри</em>",
         "sub": "Специалистов по MODX мало, и вредоносный код здесь прячется там, где обычные «чистильщики» не ищут — прямо в базе данных. Вычистим полностью, вернём сайт в поиск, дадим гарантию на год.",
         "pains": [
@@ -252,6 +258,7 @@ CMS = {
         "kw": "лечение сайта joomla от вирусов, взломали сайт joomla, дефейс joomla, восстановление сайта joomla после взлома",
         "tag": "включая шаблоны Helix",
         "price_from": "7 900",
+        "card": "Вместо сайта чужая страница? Клиенты видят это прямо сейчас. Восстановим Joomla за 4–12 часов.",
         "hero": "Сайт на Joomla подменили или взломали?<br><em>Восстановим за 4–12 часов</em>",
         "sub": "Сейчас идёт волна взломов сайтов на Joomla со старыми шаблонами и редакторами. Если вместо сайта чужая страница или хостинг прислал предупреждение — действовать нужно сегодня, пока сайт не вылетел из поиска.",
         "pains": [
@@ -274,6 +281,7 @@ CMS = {
         "kw": "лечение самописного сайта php от вирусов, взломали сайт php, аудит безопасности php сайта, восстановление php сайта",
         "tag": "legacy и фреймворки",
         "price_from": "12 900",
+        "card": "Разработчик пропал, а сайт лежит? Разберёмся в чужом коде, спасём проект и оставим документацию.",
         "hero": "Самописный сайт сломался,<br>а разработчика нет? <em>Спасём</em>",
         "sub": "Старый код без документации, автор пропал, а сайт взломали или он упал после переезда. Разберёмся в чужом коде руками, вычистим заражение, поднимем проект и оставим вам понятную документацию.",
         "pains": [
@@ -299,19 +307,23 @@ def base_head(title, desc, page, kw="", schema=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://mc.yandex.ru https://mc.yandex.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com https://mc.webvisor.org https://mc.webvisor.com wss://mc.yandex.ru wss://mc.yandex.com; frame-src https://mc.yandex.ru https://mc.yandex.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>{title}</title>
 <meta name="description" content="{desc}">
 {kw_meta}<meta name="robots" content="index, follow">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="SiteRescue24">
+<meta property="og:site_name" content="intelprime.ru">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{DOMAIN}/assets/logo.png">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="{DOMAIN}/assets/logo.png">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -321,14 +333,14 @@ def base_head(title, desc, page, kw="", schema=""):
 <body>
 <header>
   <div class="container nav">
-    <a class="logo" href="index.html"><span class="dot"></span>SiteRescue<span class="red">24</span></a>
+    <a class="logo" href="index.html"><img src="assets/logo.png" alt="IntelPrime — защита от взлома сайтов"></a>
     <nav class="nav-links">
       <a href="index.html#cms">Платформы</a>
       <a href="{page}#process">Как работаем</a>
-      <a href="{page}#pricing">Цены</a>
+      <a class="nav-hot" href="{page}#pricing">Цены — от 6 900 ₽</a>
       <a href="{page}#faq">Вопросы</a>
     </nav>
-    {socials('socials nav-socials')}
+    {socials('socials nav-socials', phone=False)}
     <a class="nav-phone" href="{PHONE_HREF}">{PHONE}</a>
     <a class="nav-phone-icon soc-ph" href="{PHONE_HREF}" aria-label="Позвонить">{icon('phone')}</a>
     <a class="btn btn-cta nav-cta" href="{page}#contact">Спасти сайт</a>
@@ -336,9 +348,9 @@ def base_head(title, desc, page, kw="", schema=""):
   </div>
 </header>
 <div class="mm-overlay" id="mm-overlay"></div>
-<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <div class="mm-head">
-      <a class="logo" href="index.html"><span class="dot"></span>SiteRescue<span class="red">24</span></a>
+      <a class="logo" href="index.html"><img src="assets/logo.png" alt="IntelPrime — защита от взлома сайтов"></a>
       <button class="mm-close" id="mm-close" aria-label="Закрыть меню">✕</button>
     </div>
     <nav>
@@ -353,43 +365,96 @@ def base_head(title, desc, page, kw="", schema=""):
 </div>
 """
 
+FACT_ICONS = {
+    "bolt": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    "clock": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    "search": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    "wallet": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+    "shield": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>',
+    "globe": '<svg class="fact-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+}
+
+
 def facts_section(price_from, scope):
     """Короткий блок фактов: его цитируют ИИ-ответы Яндекса, Google и чат-боты."""
-    rows = [
-        ("Услуга", f"Срочное лечение от вирусов и восстановление после взлома для {scope}"),
-        ("Срок", "4–12 часов в большинстве случаев, максимум 24 часа"),
-        ("Диагностика", "Бесплатно, результат и точная цена — за 30 минут"),
-        ("Цена", f"от {price_from} ₽ разово; подписка «Охрана» — 1 990 ₽/мес"),
-        ("Предоплата", "Нет: оплата после проверки работающего сайта"),
-        ("Гарантия", "1 год письменно в договоре: повторный взлом того же типа чиним бесплатно"),
-        ("Режим работы", "Заявки круглосуточно, 7 дней в неделю"),
-        ("География", "Вся Россия и СНГ, работаем удалённо"),
-        ("Контакты", f'<a href="{PHONE_HREF}">{PHONE}</a>, <a href="{TG}">Telegram</a>, <a href="mailto:{EMAIL}">{EMAIL}</a>'),
+    cards = [
+        ("bolt", "Услуга", f"Срочное лечение от вирусов и восстановление после взлома для {scope}"),
+        ("clock", "Срок", "<b>4–12 часов</b> в большинстве случаев, максимум 24 часа"),
+        ("search", "Диагностика", "<b>Бесплатно</b>: результат и точная цена — за 30 минут"),
+        ("wallet", "Предоплата", "<b>0 ₽</b> — оплата после проверки работающего сайта"),
+        ("shield", "Гарантия", "<b>1 год</b>: повторный взлом того же типа чиним бесплатно"),
+        ("globe", "Режим и география", "Заявки <b>24/7</b> · вся Россия и СНГ, работаем удалённо"),
     ]
-    items = "".join(f"<dt>{t}</dt><dd>{v}</dd>" for t, v in rows)
+    items = "".join(
+        f'<div class="fact reveal">{FACT_ICONS[ic]}<dt>{t}</dt><dd>{v}</dd></div>'
+        for ic, t, v in cards
+    )
     return f"""
-<section class="light" style="padding:44px 0" id="short">
+<section class="light facts-sec" id="short">
   <div class="container">
-    <h2 style="font-size:1.4rem">Кратко: что, за сколько и как быстро</h2>
-    <dl class="facts">{items}</dl>
-    <p class="fine">Обновлено: <time datetime="{BUILD_DATE}">{BUILD_DATE_RU}</time></p>
-  </div>
-</section>
-"""
-
-
-STRIP = """
-<section style="padding:44px 0" class="light">
-  <div class="container">
-    <div class="strip reveal">
-      <div><b>30 мин</b><span>и вы знаете, что случилось и сколько стоит ремонт</span></div>
-      <div><b>24 часа</b><span>максимум — и сайт снова приносит деньги</span></div>
-      <div><b>0 ₽</b><span>предоплаты: платите, когда сайт уже работает</span></div>
-      <div><b>1 год</b><span>гарантии: повторный взлом чиним бесплатно</span></div>
+    <div class="wm" data-wm="Факты"><h2>Сайт снова работает через 4–12 часов —<br><span class="red">платите только за результат</span></h2>
+    <p class="lead">Сроки, цена и гарантии — на одном экране, без мелкого шрифта и звёздочек.</p></div>
+    <div class="facts-wrap">
+      <dl class="facts">{items}</dl>
+      <aside class="facts-cta reveal">
+        <span class="facts-cta-tag">Разово, фиксированная цена</span>
+        <div class="facts-price">от <b>{price_from} ₽</b></div>
+        <p class="facts-price-note">или подписка «Охрана» — 1 990 ₽/мес: мониторинг, бэкапы и защита</p>
+        <a class="btn btn-cta facts-btn" href="index.html#cms">Узнать точную цену — 0 ₽</a>
+        <div class="facts-contacts">
+          <a href="{PHONE_HREF}">{icon('phone')}{PHONE}</a>
+          <a href="mailto:{EMAIL}">{icon('mail')}{EMAIL}</a>
+        </div>
+        {socials('socials facts-socials')}
+        <p class="fine">Ответим за 10 минут</p>
+      </aside>
     </div>
   </div>
 </section>
 """
+
+
+STRIP = f"""
+<section class="strip-sec">
+  <div class="container">
+    <div class="strip reveal">
+      <div class="strip-head">
+        <span class="strip-tag">Наши обязательства</span>
+        <h2>Цифры, за которые мы <span class="strip-accent">отвечаем</span></h2>
+      </div>
+      <div class="strip-grid">
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['search']}</span><b>30 мин</b><span>и вы знаете, что случилось и сколько стоит ремонт</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['clock']}</span><b>24 часа</b><span>максимум — и сайт снова приносит деньги</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['wallet']}</span><b>0 ₽</b><span>предоплаты: платите, когда сайт уже работает</span></div>
+        <div class="strip-item"><span class="strip-ic">{FACT_ICONS['shield']}</span><b>1 год</b><span>гарантии: повторный взлом чиним бесплатно</span></div>
+      </div>
+      <div class="strip-foot">
+        <a class="btn btn-cta strip-btn js-open-modal" href="#contact">Получить бесплатную диагностику</a>
+        <p>Без предоплаты · Ответим за 10 минут · Заявки 24/7</p>
+      </div>
+    </div>
+  </div>
+</section>
+"""
+
+def quick_form(dark=False):
+    """Мини-форма «сайт + телефон»: заявка уходит сразу (send-lead.php), без popup."""
+    cls = "quick-form js-quick-form reveal" + (" qf-dark" if dark else "")
+    return f"""<form class="{cls}" novalidate>
+      <div class="qf-head">
+        <b class="qf-title">Узнайте бесплатно, что с вашим сайтом</b>
+        <p class="qf-sub">Оставьте сайт и телефон — через 30 минут вы будете знать диагноз и точную цену ремонта</p>
+      </div>
+      <div class="qf-row">
+        <input type="url" name="site" placeholder="Ваш сайт, например site.ru" maxlength="200" autocomplete="url" required>
+        <input type="tel" name="phone" class="js-phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
+        <button class="btn btn-cta qf-btn" type="submit">Получить диагноз — 0 ₽</button>
+      </div>
+      <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="form-error" aria-live="polite"></p>
+      <div class="qf-points"><span>Ответ за 30 минут</span><span>Без предоплаты</span><span>Ни к чему не обязывает</span></div>
+    </form>"""
+
 
 def pain_section(pains, money_line):
     items = "".join(
@@ -402,21 +467,56 @@ def pain_section(pains, money_line):
     <p class="lead">Взлом — это не «технические проблемы». Это прямые потери бизнеса, которые растут с каждым часом:</p></div>
     <div class="pain-list">{items}</div>
     <div class="money reveal">{money_line}</div>
+    {quick_form()}
   </div>
 </section>
 """
 
+PROC_ICONS = {
+    "chat": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+    "lock": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    "tool": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    "check": '<svg class="proc-ic" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+}
+
+
 def process_section():
-    return """
+    steps = [
+        ("chat", "10 минут", "Ответим за 10 минут", "Возьмём сайт в работу и за 30 минут скажем: что случилось, сколько стоит и когда заработает.", "Бесплатно"),
+        ("lock", "До старта работ", "Фиксируем цену", "Называем точную сумму до начала работ. Никаких «в процессе выяснилось, доплатите».", "Цена не меняется"),
+        ("tool", "4–12 часов", "Чиним и чистим", "Убираем заражение из файлов и базы, находим и закрываем причину взлома.", "Работаем на копии"),
+        ("check", "Финал", "Проверяете — потом платите", "Сдаём работающий сайт, возвращаем его в поиск, ставим защиту. Оплата — после проверки.", "Гарантия 1 год письменно"),
+    ]
+    cards = "".join(
+        f"""
+      <article class="proc-step reveal js-open-modal" role="button" tabindex="0" aria-label="{title} — оставить заявку">
+        <div class="proc-head"><span class="proc-num">{i}</span><span class="proc-ic-wrap">{PROC_ICONS[ic]}</span></div>
+        <span class="proc-time">{time}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+        <span class="proc-badge">{badge}</span>
+      </article>"""
+        for i, (ic, time, title, text, badge) in enumerate(steps, 1)
+    )
+    return f"""
 <section id="process">
   <div class="container">
-    <div class="center reveal"><h2>Что будет после вашей заявки</h2>
-    <p class="lead">Никакой магии и туманных обещаний — четыре понятных шага:</p></div>
-    <div class="grid grid-4" style="margin-top:44px">
-      <div class="card step reveal"><div class="num">1</div><h3>Ответим за 10 минут</h3><p>Возьмём сайт в работу и за 30 минут скажем: что случилось, сколько стоит и когда заработает.</p><small>Бесплатно</small></div>
-      <div class="card step reveal"><div class="num">2</div><h3>Фиксируем цену</h3><p>Называем точную сумму до начала работ. Никаких «в процессе выяснилось, доплатите».</p><small>Цена не меняется</small></div>
-      <div class="card step reveal"><div class="num">3</div><h3>Чиним и чистим</h3><p>Убираем заражение из файлов и базы, находим и закрываем причину взлома.</p><small>Сайт не трогаем — работаем на копии</small></div>
-      <div class="card step reveal"><div class="num">4</div><h3>Вы проверяете — потом платите</h3><p>Сдаём работающий сайт, возвращаем его в поиск, ставим защиту. Оплата — после проверки.</p><small>Гарантия 1 год письменно</small></div>
+    <div class="center reveal"><span class="sec-tag">Как мы работаем</span>
+    <h2>Что будет после <span class="red">вашей заявки</span></h2>
+    <p class="lead">Никакой магии и туманных обещаний — четыре понятных шага от заявки до работающего сайта:</p></div>
+    <div class="proc">
+      <div class="proc-track" aria-hidden="true"></div>{cards}
+    </div>
+    <div class="proc-cta reveal">
+      <div class="proc-cta-txt">
+        <b>Сайт лежит прямо сейчас?</b>
+        <span>Опишите проблему — через 30 минут вы будете знать диагноз и точную цену. Это бесплатно и ни к чему не обязывает.</span>
+        {socials('socials proc-socials', phone=False)}
+      </div>
+      <div class="proc-cta-btns">
+        <a class="btn btn-cta" href="#contact">Узнать диагноз за 30 минут — 0 ₽</a>
+        <a class="btn btn-outline proc-cta-phone" href="{PHONE_HREF}">{PHONE}</a>
+      </div>
     </div>
   </div>
 </section>
@@ -468,7 +568,8 @@ def pricing_section(p_from, cms_name):
         <a class="btn btn-outline" href="#contact">Подключить</a>
       </div>
     </div>
-    <p class="center" style="margin-top:22px;color:#777;font-size:.9rem">Оплата по счёту с договором или картой. Для юрлиц — закрывающие документы. Ваши данные и доступы никому не передаём — это прописано в договоре.</p>
+    <p class="center" style="margin-top:22px;color:#777;font-size:.9rem">Оплата по счёту или картой. Для юрлиц — закрывающие документы. Ваши данные и доступы никому не передаём.</p>
+    {quick_form()}
   </div>
 </section>
 """
@@ -480,9 +581,9 @@ FAQ = """
     <div style="margin-top:36px">
       <details class="faq-item reveal"><summary>А если вы не сможете починить?</summary><div class="answer">Тогда вы не платите ничего. Предоплаты нет: сначала бесплатная диагностика и точная цена, оплата — после того, как вы проверили работающий сайт.</div></details>
       <details class="faq-item reveal"><summary>У меня нет резервной копии. Это конец?</summary><div class="answer">Нет. Восстанавливаем и без бэкапа: пересобираем сайт из чистых дистрибутивов и переносим ваш контент и базу. Часть контента при необходимости достаём из кэша поисковиков.</div></details>
-      <details class="faq-item reveal"><summary>Взлом повторится?</summary><div class="answer">Мы закрываем причину взлома, а не только следы. Если в течение года сайт взломают тем же способом — чиним бесплатно. Это прописано в договоре.</div></details>
+      <details class="faq-item reveal"><summary>Взлом повторится?</summary><div class="answer">Мы закрываем причину взлома, а не только следы. Если в течение года сайт взломают тем же способом — чиним бесплатно.</div></details>
       <details class="faq-item reveal"><summary>Как быстро вы начнёте?</summary><div class="answer">Отвечаем в течение 10 минут, работаем 24/7. Большинство сайтов возвращаем к жизни за 4–12 часов, максимум — сутки.</div></details>
-      <details class="faq-item reveal"><summary>Придётся давать доступы к хостингу?</summary><div class="answer">Да, без доступа к файлам и базе вылечить сайт нельзя. Работаем по договору: ваши данные и доступы никому не передаются. После работ рекомендуем сменить пароли — поможем всё настроить.</div></details>
+      <details class="faq-item reveal"><summary>Придётся давать доступы к хостингу?</summary><div class="answer">Да, без доступа к файлам и базе вылечить сайт нельзя. Ваши данные и доступы никому не передаются. После работ рекомендуем сменить пароли — поможем всё настроить.</div></details>
       <details class="faq-item reveal"><summary>Хостинг уже заблокировал сайт. Что делать?</summary><div class="answer">Оставьте заявку — свяжемся с поддержкой хостинга от вашего имени, получим логи и снимем блокировку после чистки. Это входит в стоимость.</div></details>
     </div>
   </div>
@@ -498,16 +599,16 @@ def contact_section():
       <p class="lead" style="margin:0 auto;color:#c9c9c9">Оставьте заявку — через 30 минут вы будете точно знать, что случилось, сколько стоит ремонт и когда сайт снова начнёт приносить деньги. Бесплатно и без обязательств.</p>
     </div>
     <form class="form-card reveal" id="lead-form" novalidate>
+      <input type="text" name="name" placeholder="Ваше имя" maxlength="60" required autocomplete="name">
       <input type="url" name="site" placeholder="Ссылка на ваш сайт" maxlength="200" autocomplete="url" required>
       <input type="tel" name="phone" class="js-phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
       <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="form-error" aria-live="polite"></p>
       <button class="btn btn-cta btn-lg" type="submit">Узнать, что с сайтом — бесплатно</button>
-      <p class="fine">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
     </form>
-    {socials('socials form-socials')}
+    {socials('socials form-socials', phone=False)}
     <div class="messengers">
-      <a class="btn btn-outline" href="{TG}">Написать в Telegram</a>
       <a class="btn btn-outline" href="{PHONE_HREF}">{PHONE}</a>
     </div>
     <p style="margin-top:18px;color:#8a8a8a;font-size:.9rem">Работаем 24/7 · Отвечаем за 10 минут</p>
@@ -524,14 +625,14 @@ FOOTER = """
         <p>Напишите в мессенджер — отвечаем за 10 минут, 24/7</p>
       </div>
       <div class="footer-cta-btns">
-        <a class="btn btn-cta" href="%TG%">Telegram</a>
+        <a class="btn btn-cta" href="%TG%" target="_blank" rel="noopener">Telegram</a>
         <a class="btn btn-outline" href="%PHONE_HREF%">%PHONE%</a>
       </div>
     </div>
     <div class="footer-grid footer-grid-3">
       <div class="footer-col footer-brand">
-        <a class="logo" href="index.html"><span class="dot"></span>SiteRescue<span class="red">24</span></a>
-        <p>Скорая помощь сайтам: срочный ремонт, лечение от вирусов и защита от взлома. Работаем по всей России и СНГ — удалённо, по договору.</p>
+        <a class="logo" href="index.html"><img src="assets/logo.png" alt="IntelPrime — защита от взлома сайтов"></a>
+        <p>Скорая помощь сайтам: срочный ремонт, лечение от вирусов и защита от взлома. Работаем по всей России и СНГ — удалённо.</p>
         <div class="footer-work">Работаем 10:00–22:00 МСК<br><span>Экстренные случаи — 24/7</span></div>
       </div>
       <div class="footer-col">
@@ -546,20 +647,20 @@ FOOTER = """
       <div class="footer-col">
         <b>Контакты</b>
         <a href="%PHONE_HREF%" class="footer-phone">%PHONE%</a>
-        <a href="mailto:help@siterescue24.ru">help@siterescue24.ru</a>
+        <a href="mailto:%EMAIL%">%EMAIL%</a>
         %SOCIALS%
-        <div class="footer-badges"><span>Договор</span><span>Конфиденциально</span><span>Гарантия 1 год</span></div>
+        <div class="footer-badges"><span>Без предоплаты</span><span>Конфиденциально</span><span>Гарантия 1 год</span></div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 SiteRescue24. Все права защищены.</div>
-      <div><a href="#">Политика конфиденциальности</a> · <a href="#">Договор-оферта</a> · <a href="#">Реквизиты</a></div>
+      <div>© 2026 intelprime.ru. Все права защищены.</div>
+      <div><a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></div>
     </div>
   </div>
   <a class="scrollup" href="#" aria-label="Наверх">↑</a>
-</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%SOCIALS%", socials("socials footer-socials")) + """
+</footer>""".replace("%TG%", TG).replace("%PHONE_HREF%", PHONE_HREF).replace("%PHONE%", PHONE).replace("%EMAIL%", EMAIL).replace("%SOCIALS%", socials("socials footer-socials")) + """
 <div class="sticky-cta"><a class="btn btn-cta btn-lg" href="#contact">Спасти сайт — диагностика 0 ₽</a></div>
-<div class="modal-overlay" id="lead-modal" aria-hidden="true">
+<div class="modal-overlay" id="lead-modal" aria-hidden="true" inert>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
     <div class="modal-badge"><span class="pulse"></span>Ответим за 10 минут</div>
@@ -572,7 +673,7 @@ FOOTER = """
       <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="form-error" aria-live="polite"></p>
       <button class="btn btn-cta btn-lg" type="submit">Получить бесплатную диагностику</button>
-      <p class="fine">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a>.</p>
     </form>
     <div class="modal-ok" id="modal-ok">
       <div class="ok-ic">✓</div>
@@ -581,13 +682,20 @@ FOOTER = """
     </div>
   </div>
 </div>
+<div class="cookie-bar" id="cookie-bar" role="dialog" aria-label="Сообщение об использовании cookie" aria-hidden="true">
+  <div class="cookie-ic">🍪</div>
+  <div class="cookie-txt">Мы используем файлы cookie для корректной работы сайта. Оставаясь на сайте, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a>.</div>
+  <button class="btn btn-cta cookie-btn" id="cookie-accept" type="button">Принять</button>
+</div>
 <script src="assets/main.js"></script>
+<script src="assets/metrika.js"></script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112155075" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 </body>
 </html>
 """
 
 def cms_page(slug, d):
-    title = f"Срочный ремонт и лечение сайта на {d['name']} за 24 часа — без предоплаты | SiteRescue24"
+    title = f"Срочный ремонт и лечение сайта на {d['name']} за 24 часа — без предоплаты | intelprime.ru"
     desc = f"Сайт на {d['name']} взломан или не работает? Удалим вирусы и вернём сайт за 24 часа. Цена от {d['price_from']} ₽, без предоплаты, гарантия 1 год. Бесплатная диагностика за 30 минут, работаем 24/7 по всей России."
     head = base_head(
         title=title,
@@ -614,13 +722,13 @@ def cms_page(slug, d):
         <div class="hero-points">
           <span><b>—</b> Без предоплаты</span>
           <span><b>—</b> Гарантия 1 год</span>
-          <span><b>—</b> Работаем по договору</span>
+          <span><b>—</b> Отвечаем за 10 минут</span>
         </div>
       </div>
       <div class="promise reveal visible">
         <h3>Что мы сделаем с вашим {d['short']}</h3>
         <ul>{extras}</ul>
-        <p class="fine">Не починим — не платите. Это условие договора, а не обещание на словах.</p>
+        <p class="fine">Не починим — не платите. Никаких рисков с вашей стороны.</p>
       </div>
     </div>
   </div>
@@ -635,7 +743,7 @@ def cms_page(slug, d):
 {FOOTER}"""
 
 def index_page():
-    title = "Сайт взломали или он не работает? Лечение и восстановление за 24 часа | SiteRescue24"
+    title = "Сайт взломали или он не работает? Лечение и восстановление за 24 часа | intelprime.ru"
     desc = "Срочное лечение сайтов от вирусов и восстановление после взлома: WordPress, WooCommerce, 1С-Битрикс, OpenCart, MODX, Joomla, самописный PHP. Без предоплаты, гарантия 1 год, диагностика бесплатно за 30 минут. Работаем 24/7 по всей России."
     head = base_head(
         title=title,
@@ -651,7 +759,7 @@ def index_page():
         <span class="tag">{d['tag']}</span>
         <div class="cms-logo" style="background:{d['color']}">{icon(d['logo'], 'cms-icn')}</div>
         <h3><a href="{slug}.html">{d['name']}</a></h3>
-        <p>{d['pains'][0][0]} — и другие проблемы. Починим и защитим.</p>
+        <p>{d['card']}</p>
         <span class="price">от {d['price_from']} ₽</span>
         <button class="go js-open-modal" type="button" data-cms="{d['name']}">Оставить заявку →</button>
       </div>"""
@@ -677,7 +785,7 @@ def index_page():
         <div class="hero-points">
           <span><b>—</b> Без предоплаты</span>
           <span><b>—</b> Гарантия 1 год</span>
-          <span><b>—</b> Работаем по договору</span>
+          <span><b>—</b> Отвечаем за 10 минут</span>
         </div>
       </div>
       <div class="promise promise-v2 reveal visible">
@@ -704,6 +812,7 @@ def index_page():
     <p class="lead" style="color:#a3a3a3">Под каждую систему — своя методика: мы знаем, где именно прячутся проблемы в вашей CMS.</p></div>
     <div class="grid grid-3" style="margin-top:44px">{cards}
     </div>
+    {quick_form(dark=True)}
   </div>
 </section>
 <section class="light" style="padding-top:0">
@@ -712,11 +821,11 @@ def index_page():
     <div class="vs-grid reveal" style="margin-top:44px">
       <div class="vs-card vs-featured">
         <div class="vs-tag">Ваш выбор</div>
-        <h3>SiteRescue24</h3>
+        <h3>intelprime.ru</h3>
         <ul>
           <li><span class="vi ok">✓</span><div><b>Находим причину взлома</b><span>всегда — а не только следы</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Чистим файлы и базу данных</b><span>вирусы не возвращаются</span></div></li>
-          <li><span class="vi ok">✓</span><div><b>Письменная гарантия 1 год</b><span>прописана в договоре</span></div></li>
+          <li><span class="vi ok">✓</span><div><b>Гарантия 1 год</b><span>повторный взлом чиним бесплатно</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Предоплата 0 ₽</b><span>платите за работающий сайт</span></div></li>
           <li><span class="vi ok">✓</span><div><b>Повторный взлом исключаем</b><span>закрываем дыру, а не маскируем</span></div></li>
         </ul>
@@ -743,6 +852,7 @@ def index_page():
         </ul>
       </div>
     </div>
+    {quick_form()}
   </div>
 </section>
 {process_section()}
@@ -751,9 +861,70 @@ def index_page():
 {contact_section()}
 {FOOTER}"""
 
+def privacy_page():
+    title = "Политика конфиденциальности | intelprime.ru"
+    desc = "Политика в отношении обработки персональных данных посетителей сайта intelprime.ru в соответствии с ФЗ-152 «О персональных данных»."
+    head = base_head(title=title, desc=desc, page="privacy.html").replace('href="privacy.html#', 'href="index.html#')
+    return head + f"""
+<section class="legal">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Главная</a> → Политика конфиденциальности</div>
+    <h1>Политика в отношении обработки персональных данных</h1>
+
+    <h2>1. Общие положения</h2>
+    <p>1.1. Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» (далее — Закон о персональных данных) и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые администрацией сайта intelprime.ru (далее — Оператор).</p>
+    <p>1.2. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</p>
+    <p>1.3. Настоящая политика (далее — Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта {DOMAIN}/ (далее — Сайт).</p>
+
+    <h2>2. Основные понятия, используемые в Политике</h2>
+    <p>2.1. Обработка персональных данных — любое действие (операция) или совокупность действий, совершаемых с использованием средств автоматизации или без них с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение, извлечение, использование, передачу, обезличивание, блокирование, удаление и уничтожение персональных данных.</p>
+    <p>2.2. Персональные данные — любая информация, относящаяся прямо или косвенно к определённому или определяемому Пользователю Сайта.</p>
+    <p>2.3. Пользователь — любой посетитель Сайта.</p>
+    <p>2.4. Блокирование персональных данных — временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных).</p>
+    <p>2.5. Уничтожение персональных данных — действия, в результате которых персональные данные уничтожаются безвозвратно без возможности дальнейшего восстановления.</p>
+    <p>2.6. Обезличивание персональных данных — действия, в результате которых невозможно определить без дополнительной информации принадлежность персональных данных конкретному Пользователю.</p>
+
+    <h2>3. Какие данные обрабатывает Оператор</h2>
+    <p>3.1. Имя, указанное Пользователем в форме заявки.</p>
+    <p>3.2. Номер телефона.</p>
+    <p>3.3. Адрес электронной почты (если Пользователь указывает его при обращении).</p>
+    <p>3.4. Адрес (URL) сайта Пользователя, переданный для диагностики и оказания услуг.</p>
+    <p>3.5. Также на Сайте происходит сбор и обработка обезличенных данных о посетителях (в т.ч. файлов cookie) с помощью сервисов интернет-статистики: IP-адрес, тип и версия браузера, данные об устройстве, источник перехода на Сайт, просмотренные страницы и длительность сессии. Файл cookie — это фрагмент данных, отправляемый сервером и хранимый на устройстве Пользователя.</p>
+    <p>3.6. Обработка специальных категорий персональных данных (расовая и национальная принадлежность, политические взгляды, религиозные или философские убеждения и т.п.) Оператором не осуществляется.</p>
+
+    <h2>4. Цели обработки персональных данных</h2>
+    <p>4.1. Связь с Пользователем по оставленной заявке: уточнение деталей, диагностика сайта, согласование стоимости и сроков работ.</p>
+    <p>4.2. Заключение и исполнение договора на оказание услуг по диагностике, лечению, восстановлению и защите сайтов.</p>
+    <p>4.3. Улучшение работы Сайта и качества обслуживания на основе обезличенной статистики посещений.</p>
+
+    <h2>5. Правовые основания обработки</h2>
+    <p>5.1. Оператор обрабатывает персональные данные Пользователя только в случае их самостоятельного заполнения и/или отправки Пользователем через формы, размещённые на Сайте, либо при обращении через мессенджеры и электронную почту. Отправляя свои данные, Пользователь выражает согласие с настоящей Политикой.</p>
+    <p>5.2. Оператор обрабатывает обезличенные данные о Пользователе, если это разрешено в настройках браузера Пользователя (включено сохранение файлов cookie и использование технологии JavaScript).</p>
+
+    <h2>6. Порядок сбора, хранения, передачи и других видов обработки</h2>
+    <p>6.1. Безопасность персональных данных обеспечивается путём реализации правовых, организационных и технических мер, необходимых для выполнения в полном объёме требований действующего законодательства в области защиты персональных данных.</p>
+    <p>6.2. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</p>
+    <p>6.3. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства РФ.</p>
+    <p>6.4. В случае выявления неточностей в персональных данных Пользователь может актуализировать их, направив Оператору уведомление на адрес электронной почты <a href="mailto:{EMAIL}">{EMAIL}</a> с пометкой «Актуализация персональных данных».</p>
+    <p>6.5. Срок обработки персональных данных определяется достижением целей, для которых они были собраны. Пользователь может в любой момент отозвать своё согласие на обработку персональных данных, направив Оператору уведомление на <a href="mailto:{EMAIL}">{EMAIL}</a> с пометкой «Отзыв согласия на обработку персональных данных».</p>
+
+    <h2>7. Файлы cookie</h2>
+    <p>7.1. Сайт использует файлы cookie для корректной работы форм, запоминания выбора Пользователя и сбора обезличенной статистики посещений.</p>
+    <p>7.2. Пользователь может отключить файлы cookie в настройках своего браузера. При этом отдельные функции Сайта могут работать некорректно.</p>
+
+    <h2>8. Заключительные положения</h2>
+    <p>8.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору по электронной почте <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+    <p>8.2. В настоящем документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены её новой версией.</p>
+    <p>8.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу {DOMAIN}/privacy.html.</p>
+  </div>
+</section>
+{FOOTER}"""
+
+
 pages = {"index.html": index_page()}
 for slug, d in CMS.items():
     pages[f"{slug}.html"] = cms_page(slug, d)
+pages["privacy.html"] = privacy_page()
 
 for fname, html in pages.items():
     with open(os.path.join(OUT, fname), "w", encoding="utf-8") as f:
@@ -787,7 +958,7 @@ with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as f:
 print("written robots.txt")
 
 # llms.txt — краткая машинночитаемая выжимка для языковых моделей
-llms = f"""# SiteRescue24
+llms = f"""# intelprime.ru
 
 > Срочное лечение сайтов от вирусов и восстановление после взлома за 24 часа.
 > Работаем по всей России и СНГ удалённо, заявки принимаем круглосуточно.
@@ -801,7 +972,7 @@ llms = f"""# SiteRescue24
 - Гарантия 1 год письменно: повторный взлом тем же способом устраняем бесплатно.
 - Восстанавливаем сайты без резервной копии, чистим и файлы, и базу данных.
 - Возвращаем сайт в поиск: снимаем метки в Яндекс Вебмастере и Google Search Console.
-- Работаем по договору, для юрлиц — закрывающие документы.
+- Для юрлиц — закрывающие документы.
 - Контакты: {PHONE}, Telegram {TG}, WhatsApp {WA}, e-mail {EMAIL}.
 
 Страницы:
@@ -809,7 +980,7 @@ llms = f"""# SiteRescue24
 """
 for slug, d in CMS.items():
     llms += f"- [{d['name']}]({DOMAIN}/{slug}.html): лечение и восстановление, от {d['price_from']} ₽.\n"
-llms += f"\nОбновлено: {BUILD_DATE}\n"
+
 with open(os.path.join(OUT, "llms.txt"), "w", encoding="utf-8") as f:
     f.write(llms)
 print("written llms.txt")
